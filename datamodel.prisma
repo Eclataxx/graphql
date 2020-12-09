@@ -3,6 +3,7 @@ Type Role {
  name: String
  createdAt: DateTime! @createdAt
  updatedAt: DateTime! @updatedAt
+ users: [User!]!
 }
 
 Type Product {
@@ -24,6 +25,7 @@ Type Order{
  user: User
  createdAt: DateTime! @createdAt
  updatedAt: DateTime! @updatedAt
+ orders: [Orders!]!
 }
 
 Type Address {
