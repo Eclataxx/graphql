@@ -1,0 +1,59 @@
+Type Role {
+ id: ID! @id
+ name: String
+ createdAt: DateTime! @createdAt
+ updatedAt: DateTime! @updatedAt
+}
+
+Type Product {
+ id: ID! @id
+ name: String
+ price: Float
+ stock: Int
+ sold: Int @default(value: 0)
+ status: Int
+ user: User
+ createdAt: DateTime! @createdAt
+ updatedAt: DateTime! @updatedAt
+}
+
+Type Order{
+ id: ID! @id
+ total_price: Float
+ status: Int @default(value: 0)
+ user: User
+ createdAt: DateTime! @createdAt
+ updatedAt: DateTime! @updatedAt
+}
+
+Type Address {
+ id: ID! @id
+ city: String
+ states: String
+ country: String
+ Postal_code: String
+ user: User
+ createdAt: DateTime! @createdAt
+ updatedAt: DateTime! @updatedAt
+}
+
+Type Validation_Product{
+  id: ID! @id
+  seller: User
+  admin: User
+  status: int @default(value: 0)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+Type User {
+  id: ID! @id
+  name: String
+  address: Address
+  status: Int @default(value: 0)
+  roles: [Role!]!
+  Orders: [Order!]!
+  productsOwned: [Product!]!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
