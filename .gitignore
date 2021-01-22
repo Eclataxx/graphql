@@ -2,7 +2,7 @@
 #idea
 .idea
 
-generated
+/generated
 # dependencies
 /node_modules
 
