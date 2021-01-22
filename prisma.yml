@@ -8,6 +8,6 @@ generate:
 hooks:
   post-deploy:
   - prisma1 generate
-  # - graphql get-schema --project prisma
-  # - graphql codegen
+  - graphql get-schema --project prisma
+  - graphql codegen
   - echo "Deployment finished"

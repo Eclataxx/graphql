@@ -15,7 +15,7 @@ enum ProductStatus {
   IN_STOCK
 }
 
-type Order{
+type Order {
  id: ID! @id
  total_price: Float!
  status: OrderStatus! @default(value: PENDING)

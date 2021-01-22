@@ -1,5 +1,3 @@
-import { ModuleResolutionKind } from "typescript";
-
 const { Queries } = require('./Queries');
 const { Mutations } = require('./Mutations');
 

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2016", "esnext.asynciterable"]
+    "lib": ["es6", "esnext.asynciterable"]
   }
 }
   
