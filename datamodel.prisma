@@ -2,14 +2,12 @@ type Product {
  id: ID! @id
  name: String!
  price: Int!
- status: ProductStatus! @default(value: TO_REVIEW)
- orders: [Order!]!
- submittedBy: User! @relation(link: INLINE, onDelete: CASCADE, name: "Submitted")
- validatedBy: User! @relation(link: INLINE, onDelete: CASCADE, name: "Validated")
+ status: ProductStatus @default(value: TO_REVIEW)
+ orders: [Order!]
+ submittedBy: User @relation(link: INLINE, onDelete: CASCADE, name: "Submitted")
+ validatedBy: User @relation(link: INLINE, onDelete: CASCADE, name: "Validated")
  description: String!
- carts: [Cart!]!
- createdAt: DateTime! @createdAt
- updatedAt: DateTime! @updatedAt
+ carts: [Cart!]
 }
 
 enum ProductStatus {
@@ -23,10 +21,8 @@ type Order {
  price: Int!
  date: DateTime!
  status: OrderStatus! @default(value: ORDERED)
- associatedUser: User! @relation(link: INLINE)
- products: [Product!]! @relation(link: TABLE)
- createdAt: DateTime! @createdAt
- updatedAt: DateTime! @updatedAt
+ associatedUser: User @relation(link: INLINE)
+ products: [Product!] @relation(link: TABLE)
 }
 
 enum OrderStatus {
@@ -38,21 +34,19 @@ enum OrderStatus {
 type Cart {
   id: ID! @id
   price: Int!
-  products: [Product!]! @relation(link: TABLE)
-  relatedUser: User!
+  products: [Product!] @relation(link: TABLE)
+  relatedUser: User
 }
 
 type Address {
  id: ID! @id
- city: String!
- country: String!
- postalCode: String!
- state: String!
- streetAddress: String!
- additionalStreetAddress: String!
- associatedUser: User!
- createdAt: DateTime! @createdAt
- updatedAt: DateTime! @updatedAt
+ city: String! @default(value: "")
+ country: String! @default(value: "")
+ postalCode: String! @default(value: "")
+ state: String! @default(value: "")
+ streetAddress: String! @default(value: "")
+ additionalStreetAddress: String! @default(value: "")
+ associatedUser: User
 }
 
 type User {
@@ -61,13 +55,11 @@ type User {
   roles: Role! @default(value: ROLE_USER)
   password: String!
   email: String!
-  address: Address! @relation(link: INLINE)
-  orders: [Order!]! 
-  products: [Product!]! @relation(name: "Submitted")
-  validatedProducts: [Product!]! @relation(name: "Validated")
-  cart: Cart! @relation(link: INLINE)
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+  address: Address @relation(link: INLINE)
+  orders: [Order!]
+  products: [Product!] @relation(name: "Submitted")
+  validatedProducts: [Product!] @relation(name: "Validated")
+  cart: Cart @relation(link: INLINE)
 }
 
 enum Role {

@@ -4,7 +4,7 @@ import resolvers from './resolvers';
 require('dotenv').config()
 
 const server = new GraphQLServer({
-  typeDefs: 'src/prisma.graphql',
+  typeDefs: 'src/schema.graphql',
   resolvers,
   context: req => ({
     req,
@@ -17,5 +17,5 @@ const server = new GraphQLServer({
 })
 
 server.start(
-    () => console.log(`GraphQL server is running on http://localhost:4000`)
+  () => console.log(`GraphQL server is running on http://localhost:4000`)
 )

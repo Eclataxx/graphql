@@ -3,11 +3,11 @@ import {
   updateUser,
   signup,
   login
- } from './mutationUser'
+} from './mutationUser'
 
-export const Mutation = { 
+export const Mutation = {
   createUser,
   updateUser,
   signup,
-  login 
+  login
 }
