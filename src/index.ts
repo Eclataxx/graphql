@@ -4,7 +4,7 @@ import resolvers from './resolvers';
 require('dotenv').config()
 
 const server = new GraphQLServer({
-  typeDefs: 'src/prisma.graphql',
+  typeDefs: 'src/schema.graphql',
   resolvers,
   context: req => ({
     req,

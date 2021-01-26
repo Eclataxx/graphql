@@ -1,6 +1,6 @@
 import { forwardTo } from 'prisma-binding'
-import jwt from 'jsonwebtoken'
-import bcrypt from 'bcryptjs'
+import * as jwt from 'jsonwebtoken'
+import * as bcrypt from 'bcryptjs'
 
 const APP_SECRET = process.env.APP_SECRET
 
