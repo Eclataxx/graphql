@@ -6,9 +6,7 @@ type Address {
   state: String!
   streetAddress: String!
   additionalStreetAddress: String!
-  associatedUser: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  associatedUser: User
 }
 
 type AddressConnection {
@@ -19,13 +17,13 @@ type AddressConnection {
 
 input AddressCreateInput {
   id: ID
-  city: String!
-  country: String!
-  postalCode: String!
-  state: String!
-  streetAddress: String!
-  additionalStreetAddress: String!
-  associatedUser: UserCreateOneWithoutAddressInput!
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+  associatedUser: UserCreateOneWithoutAddressInput
 }
 
 input AddressCreateOneWithoutAssociatedUserInput {
@@ -35,12 +33,12 @@ input AddressCreateOneWithoutAssociatedUserInput {
 
 input AddressCreateWithoutAssociatedUserInput {
   id: ID
-  city: String!
-  country: String!
-  postalCode: String!
-  state: String!
-  streetAddress: String!
-  additionalStreetAddress: String!
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
 }
 
 type AddressEdge {
@@ -63,10 +61,6 @@ enum AddressOrderByInput {
   streetAddress_DESC
   additionalStreetAddress_ASC
   additionalStreetAddress_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type AddressPreviousValues {
@@ -77,8 +71,6 @@ type AddressPreviousValues {
   state: String!
   streetAddress: String!
   additionalStreetAddress: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type AddressSubscriptionPayload {
@@ -106,7 +98,7 @@ input AddressUpdateInput {
   state: String
   streetAddress: String
   additionalStreetAddress: String
-  associatedUser: UserUpdateOneRequiredWithoutAddressInput
+  associatedUser: UserUpdateOneWithoutAddressInput
 }
 
 input AddressUpdateManyMutationInput {
@@ -118,10 +110,12 @@ input AddressUpdateManyMutationInput {
   additionalStreetAddress: String
 }
 
-input AddressUpdateOneRequiredWithoutAssociatedUserInput {
+input AddressUpdateOneWithoutAssociatedUserInput {
   create: AddressCreateWithoutAssociatedUserInput
   update: AddressUpdateWithoutAssociatedUserDataInput
   upsert: AddressUpsertWithoutAssociatedUserInput
+  delete: Boolean
+  disconnect: Boolean
   connect: AddressWhereUniqueInput
 }
 
@@ -239,22 +233,6 @@ input AddressWhereInput {
   additionalStreetAddress_ends_with: String
   additionalStreetAddress_not_ends_with: String
   associatedUser: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [AddressWhereInput!]
   OR: [AddressWhereInput!]
   NOT: [AddressWhereInput!]
@@ -292,7 +270,7 @@ type Cart {
   id: ID!
   price: Int!
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  relatedUser: User!
+  relatedUser: User
 }
 
 type CartConnection {
@@ -305,7 +283,7 @@ input CartCreateInput {
   id: ID
   price: Int!
   products: ProductCreateManyWithoutCartsInput
-  relatedUser: UserCreateOneWithoutCartInput!
+  relatedUser: UserCreateOneWithoutCartInput
 }
 
 input CartCreateManyWithoutProductsInput {
@@ -321,7 +299,7 @@ input CartCreateOneWithoutRelatedUserInput {
 input CartCreateWithoutProductsInput {
   id: ID
   price: Int!
-  relatedUser: UserCreateOneWithoutCartInput!
+  relatedUser: UserCreateOneWithoutCartInput
 }
 
 input CartCreateWithoutRelatedUserInput {
@@ -396,7 +374,7 @@ input CartSubscriptionWhereInput {
 input CartUpdateInput {
   price: Int
   products: ProductUpdateManyWithoutCartsInput
-  relatedUser: UserUpdateOneRequiredWithoutCartInput
+  relatedUser: UserUpdateOneWithoutCartInput
 }
 
 input CartUpdateManyDataInput {
@@ -424,16 +402,18 @@ input CartUpdateManyWithWhereNestedInput {
   data: CartUpdateManyDataInput!
 }
 
-input CartUpdateOneRequiredWithoutRelatedUserInput {
+input CartUpdateOneWithoutRelatedUserInput {
   create: CartCreateWithoutRelatedUserInput
   update: CartUpdateWithoutRelatedUserDataInput
   upsert: CartUpsertWithoutRelatedUserInput
+  delete: Boolean
+  disconnect: Boolean
   connect: CartWhereUniqueInput
 }
 
 input CartUpdateWithoutProductsDataInput {
   price: Int
-  relatedUser: UserUpdateOneRequiredWithoutCartInput
+  relatedUser: UserUpdateOneWithoutCartInput
 }
 
 input CartUpdateWithoutRelatedUserDataInput {
@@ -545,10 +525,8 @@ type Order {
   price: Int!
   date: DateTime!
   status: OrderStatus!
-  associatedUser: User!
+  associatedUser: User
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type OrderConnection {
@@ -562,7 +540,7 @@ input OrderCreateInput {
   price: Int!
   date: DateTime!
   status: OrderStatus
-  associatedUser: UserCreateOneWithoutOrdersInput!
+  associatedUser: UserCreateOneWithoutOrdersInput
   products: ProductCreateManyWithoutOrdersInput
 }
 
@@ -589,7 +567,7 @@ input OrderCreateWithoutProductsInput {
   price: Int!
   date: DateTime!
   status: OrderStatus
-  associatedUser: UserCreateOneWithoutOrdersInput!
+  associatedUser: UserCreateOneWithoutOrdersInput
 }
 
 type OrderEdge {
@@ -606,10 +584,6 @@ enum OrderOrderByInput {
   date_DESC
   status_ASC
   status_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type OrderPreviousValues {
@@ -617,8 +591,6 @@ type OrderPreviousValues {
   price: Int!
   date: DateTime!
   status: OrderStatus!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 input OrderScalarWhereInput {
@@ -656,22 +628,6 @@ input OrderScalarWhereInput {
   status_not: OrderStatus
   status_in: [OrderStatus!]
   status_not_in: [OrderStatus!]
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [OrderScalarWhereInput!]
   OR: [OrderScalarWhereInput!]
   NOT: [OrderScalarWhereInput!]
@@ -705,7 +661,7 @@ input OrderUpdateInput {
   price: Int
   date: DateTime
   status: OrderStatus
-  associatedUser: UserUpdateOneRequiredWithoutOrdersInput
+  associatedUser: UserUpdateOneWithoutOrdersInput
   products: ProductUpdateManyWithoutOrdersInput
 }
 
@@ -761,7 +717,7 @@ input OrderUpdateWithoutProductsDataInput {
   price: Int
   date: DateTime
   status: OrderStatus
-  associatedUser: UserUpdateOneRequiredWithoutOrdersInput
+  associatedUser: UserUpdateOneWithoutOrdersInput
 }
 
 input OrderUpdateWithWhereUniqueWithoutAssociatedUserInput {
@@ -825,22 +781,6 @@ input OrderWhereInput {
   products_every: ProductWhereInput
   products_some: ProductWhereInput
   products_none: ProductWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [OrderWhereInput!]
   OR: [OrderWhereInput!]
   NOT: [OrderWhereInput!]
@@ -861,14 +801,12 @@ type Product {
   id: ID!
   name: String!
   price: Int!
-  status: ProductStatus!
+  status: ProductStatus
   orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
-  submittedBy: User!
-  validatedBy: User!
+  submittedBy: User
+  validatedBy: User
   description: String!
   carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart!]
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type ProductConnection {
@@ -883,8 +821,8 @@ input ProductCreateInput {
   price: Int!
   status: ProductStatus
   orders: OrderCreateManyWithoutProductsInput
-  submittedBy: UserCreateOneWithoutProductsInput!
-  validatedBy: UserCreateOneWithoutValidatedProductsInput!
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
   description: String!
   carts: CartCreateManyWithoutProductsInput
 }
@@ -915,8 +853,8 @@ input ProductCreateWithoutCartsInput {
   price: Int!
   status: ProductStatus
   orders: OrderCreateManyWithoutProductsInput
-  submittedBy: UserCreateOneWithoutProductsInput!
-  validatedBy: UserCreateOneWithoutValidatedProductsInput!
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
   description: String!
 }
 
@@ -925,8 +863,8 @@ input ProductCreateWithoutOrdersInput {
   name: String!
   price: Int!
   status: ProductStatus
-  submittedBy: UserCreateOneWithoutProductsInput!
-  validatedBy: UserCreateOneWithoutValidatedProductsInput!
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
   description: String!
   carts: CartCreateManyWithoutProductsInput
 }
@@ -937,7 +875,7 @@ input ProductCreateWithoutSubmittedByInput {
   price: Int!
   status: ProductStatus
   orders: OrderCreateManyWithoutProductsInput
-  validatedBy: UserCreateOneWithoutValidatedProductsInput!
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
   description: String!
   carts: CartCreateManyWithoutProductsInput
 }
@@ -948,7 +886,7 @@ input ProductCreateWithoutValidatedByInput {
   price: Int!
   status: ProductStatus
   orders: OrderCreateManyWithoutProductsInput
-  submittedBy: UserCreateOneWithoutProductsInput!
+  submittedBy: UserCreateOneWithoutProductsInput
   description: String!
   carts: CartCreateManyWithoutProductsInput
 }
@@ -969,20 +907,14 @@ enum ProductOrderByInput {
   status_DESC
   description_ASC
   description_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type ProductPreviousValues {
   id: ID!
   name: String!
   price: Int!
-  status: ProductStatus!
+  status: ProductStatus
   description: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 input ProductScalarWhereInput {
@@ -1040,22 +972,6 @@ input ProductScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [ProductScalarWhereInput!]
   OR: [ProductScalarWhereInput!]
   NOT: [ProductScalarWhereInput!]
@@ -1090,8 +1006,8 @@ input ProductUpdateInput {
   price: Int
   status: ProductStatus
   orders: OrderUpdateManyWithoutProductsInput
-  submittedBy: UserUpdateOneRequiredWithoutProductsInput
-  validatedBy: UserUpdateOneRequiredWithoutValidatedProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
   description: String
   carts: CartUpdateManyWithoutProductsInput
 }
@@ -1168,8 +1084,8 @@ input ProductUpdateWithoutCartsDataInput {
   price: Int
   status: ProductStatus
   orders: OrderUpdateManyWithoutProductsInput
-  submittedBy: UserUpdateOneRequiredWithoutProductsInput
-  validatedBy: UserUpdateOneRequiredWithoutValidatedProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
   description: String
 }
 
@@ -1177,8 +1093,8 @@ input ProductUpdateWithoutOrdersDataInput {
   name: String
   price: Int
   status: ProductStatus
-  submittedBy: UserUpdateOneRequiredWithoutProductsInput
-  validatedBy: UserUpdateOneRequiredWithoutValidatedProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
   description: String
   carts: CartUpdateManyWithoutProductsInput
 }
@@ -1188,7 +1104,7 @@ input ProductUpdateWithoutSubmittedByDataInput {
   price: Int
   status: ProductStatus
   orders: OrderUpdateManyWithoutProductsInput
-  validatedBy: UserUpdateOneRequiredWithoutValidatedProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
   description: String
   carts: CartUpdateManyWithoutProductsInput
 }
@@ -1198,7 +1114,7 @@ input ProductUpdateWithoutValidatedByDataInput {
   price: Int
   status: ProductStatus
   orders: OrderUpdateManyWithoutProductsInput
-  submittedBy: UserUpdateOneRequiredWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
   description: String
   carts: CartUpdateManyWithoutProductsInput
 }
@@ -1310,22 +1226,6 @@ input ProductWhereInput {
   carts_every: CartWhereInput
   carts_some: CartWhereInput
   carts_none: CartWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [ProductWhereInput!]
   OR: [ProductWhereInput!]
   NOT: [ProductWhereInput!]
@@ -1374,13 +1274,11 @@ type User {
   roles: Role!
   password: String!
   email: String!
-  address: Address!
+  address: Address
   orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
   validatedProducts(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  cart: Cart!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  cart: Cart
 }
 
 type UserConnection {
@@ -1395,11 +1293,11 @@ input UserCreateInput {
   roles: Role
   password: String!
   email: String!
-  address: AddressCreateOneWithoutAssociatedUserInput!
+  address: AddressCreateOneWithoutAssociatedUserInput
   orders: OrderCreateManyWithoutAssociatedUserInput
   products: ProductCreateManyWithoutSubmittedByInput
   validatedProducts: ProductCreateManyWithoutValidatedByInput
-  cart: CartCreateOneWithoutRelatedUserInput!
+  cart: CartCreateOneWithoutRelatedUserInput
 }
 
 input UserCreateOneWithoutAddressInput {
@@ -1436,7 +1334,7 @@ input UserCreateWithoutAddressInput {
   orders: OrderCreateManyWithoutAssociatedUserInput
   products: ProductCreateManyWithoutSubmittedByInput
   validatedProducts: ProductCreateManyWithoutValidatedByInput
-  cart: CartCreateOneWithoutRelatedUserInput!
+  cart: CartCreateOneWithoutRelatedUserInput
 }
 
 input UserCreateWithoutCartInput {
@@ -1445,7 +1343,7 @@ input UserCreateWithoutCartInput {
   roles: Role
   password: String!
   email: String!
-  address: AddressCreateOneWithoutAssociatedUserInput!
+  address: AddressCreateOneWithoutAssociatedUserInput
   orders: OrderCreateManyWithoutAssociatedUserInput
   products: ProductCreateManyWithoutSubmittedByInput
   validatedProducts: ProductCreateManyWithoutValidatedByInput
@@ -1457,10 +1355,10 @@ input UserCreateWithoutOrdersInput {
   roles: Role
   password: String!
   email: String!
-  address: AddressCreateOneWithoutAssociatedUserInput!
+  address: AddressCreateOneWithoutAssociatedUserInput
   products: ProductCreateManyWithoutSubmittedByInput
   validatedProducts: ProductCreateManyWithoutValidatedByInput
-  cart: CartCreateOneWithoutRelatedUserInput!
+  cart: CartCreateOneWithoutRelatedUserInput
 }
 
 input UserCreateWithoutProductsInput {
@@ -1469,10 +1367,10 @@ input UserCreateWithoutProductsInput {
   roles: Role
   password: String!
   email: String!
-  address: AddressCreateOneWithoutAssociatedUserInput!
+  address: AddressCreateOneWithoutAssociatedUserInput
   orders: OrderCreateManyWithoutAssociatedUserInput
   validatedProducts: ProductCreateManyWithoutValidatedByInput
-  cart: CartCreateOneWithoutRelatedUserInput!
+  cart: CartCreateOneWithoutRelatedUserInput
 }
 
 input UserCreateWithoutValidatedProductsInput {
@@ -1481,10 +1379,10 @@ input UserCreateWithoutValidatedProductsInput {
   roles: Role
   password: String!
   email: String!
-  address: AddressCreateOneWithoutAssociatedUserInput!
+  address: AddressCreateOneWithoutAssociatedUserInput
   orders: OrderCreateManyWithoutAssociatedUserInput
   products: ProductCreateManyWithoutSubmittedByInput
-  cart: CartCreateOneWithoutRelatedUserInput!
+  cart: CartCreateOneWithoutRelatedUserInput
 }
 
 type UserEdge {
@@ -1503,10 +1401,6 @@ enum UserOrderByInput {
   password_DESC
   email_ASC
   email_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type UserPreviousValues {
@@ -1515,8 +1409,6 @@ type UserPreviousValues {
   roles: Role!
   password: String!
   email: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -1542,11 +1434,11 @@ input UserUpdateInput {
   roles: Role
   password: String
   email: String
-  address: AddressUpdateOneRequiredWithoutAssociatedUserInput
+  address: AddressUpdateOneWithoutAssociatedUserInput
   orders: OrderUpdateManyWithoutAssociatedUserInput
   products: ProductUpdateManyWithoutSubmittedByInput
   validatedProducts: ProductUpdateManyWithoutValidatedByInput
-  cart: CartUpdateOneRequiredWithoutRelatedUserInput
+  cart: CartUpdateOneWithoutRelatedUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1556,38 +1448,48 @@ input UserUpdateManyMutationInput {
   email: String
 }
 
-input UserUpdateOneRequiredWithoutAddressInput {
+input UserUpdateOneWithoutAddressInput {
   create: UserCreateWithoutAddressInput
   update: UserUpdateWithoutAddressDataInput
   upsert: UserUpsertWithoutAddressInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutCartInput {
+input UserUpdateOneWithoutCartInput {
   create: UserCreateWithoutCartInput
   update: UserUpdateWithoutCartDataInput
   upsert: UserUpsertWithoutCartInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutOrdersInput {
+input UserUpdateOneWithoutOrdersInput {
   create: UserCreateWithoutOrdersInput
   update: UserUpdateWithoutOrdersDataInput
   upsert: UserUpsertWithoutOrdersInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutProductsInput {
+input UserUpdateOneWithoutProductsInput {
   create: UserCreateWithoutProductsInput
   update: UserUpdateWithoutProductsDataInput
   upsert: UserUpsertWithoutProductsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
-input UserUpdateOneRequiredWithoutValidatedProductsInput {
+input UserUpdateOneWithoutValidatedProductsInput {
   create: UserCreateWithoutValidatedProductsInput
   update: UserUpdateWithoutValidatedProductsDataInput
   upsert: UserUpsertWithoutValidatedProductsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 
@@ -1599,7 +1501,7 @@ input UserUpdateWithoutAddressDataInput {
   orders: OrderUpdateManyWithoutAssociatedUserInput
   products: ProductUpdateManyWithoutSubmittedByInput
   validatedProducts: ProductUpdateManyWithoutValidatedByInput
-  cart: CartUpdateOneRequiredWithoutRelatedUserInput
+  cart: CartUpdateOneWithoutRelatedUserInput
 }
 
 input UserUpdateWithoutCartDataInput {
@@ -1607,7 +1509,7 @@ input UserUpdateWithoutCartDataInput {
   roles: Role
   password: String
   email: String
-  address: AddressUpdateOneRequiredWithoutAssociatedUserInput
+  address: AddressUpdateOneWithoutAssociatedUserInput
   orders: OrderUpdateManyWithoutAssociatedUserInput
   products: ProductUpdateManyWithoutSubmittedByInput
   validatedProducts: ProductUpdateManyWithoutValidatedByInput
@@ -1618,10 +1520,10 @@ input UserUpdateWithoutOrdersDataInput {
   roles: Role
   password: String
   email: String
-  address: AddressUpdateOneRequiredWithoutAssociatedUserInput
+  address: AddressUpdateOneWithoutAssociatedUserInput
   products: ProductUpdateManyWithoutSubmittedByInput
   validatedProducts: ProductUpdateManyWithoutValidatedByInput
-  cart: CartUpdateOneRequiredWithoutRelatedUserInput
+  cart: CartUpdateOneWithoutRelatedUserInput
 }
 
 input UserUpdateWithoutProductsDataInput {
@@ -1629,10 +1531,10 @@ input UserUpdateWithoutProductsDataInput {
   roles: Role
   password: String
   email: String
-  address: AddressUpdateOneRequiredWithoutAssociatedUserInput
+  address: AddressUpdateOneWithoutAssociatedUserInput
   orders: OrderUpdateManyWithoutAssociatedUserInput
   validatedProducts: ProductUpdateManyWithoutValidatedByInput
-  cart: CartUpdateOneRequiredWithoutRelatedUserInput
+  cart: CartUpdateOneWithoutRelatedUserInput
 }
 
 input UserUpdateWithoutValidatedProductsDataInput {
@@ -1640,10 +1542,10 @@ input UserUpdateWithoutValidatedProductsDataInput {
   roles: Role
   password: String
   email: String
-  address: AddressUpdateOneRequiredWithoutAssociatedUserInput
+  address: AddressUpdateOneWithoutAssociatedUserInput
   orders: OrderUpdateManyWithoutAssociatedUserInput
   products: ProductUpdateManyWithoutSubmittedByInput
-  cart: CartUpdateOneRequiredWithoutRelatedUserInput
+  cart: CartUpdateOneWithoutRelatedUserInput
 }
 
 input UserUpsertWithoutAddressInput {
@@ -1743,22 +1645,6 @@ input UserWhereInput {
   validatedProducts_some: ProductWhereInput
   validatedProducts_none: ProductWhereInput
   cart: CartWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
