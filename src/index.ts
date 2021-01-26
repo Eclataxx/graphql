@@ -1,26 +1,21 @@
-import { ApolloServer } from "apollo-server";
-import { env } from './environment'
-import { application } from './application'
+import { GraphQLServer } from 'graphql-yoga';
+import { Prisma } from 'prisma-binding'
+import resolvers from './resolvers';
+require('dotenv').config()
 
-const schema = application.createSchemaForApollo()
+const server = new GraphQLServer({
+  typeDefs: 'src/schema.graphql',
+  resolvers,
+  context: req => ({
+    req,
+    prisma: new Prisma({
+      typeDefs: 'src/generated/prisma.graphql',
+      endpoint:
+        process.env.PRISMA_ENDPOINT,
+    }),
+  }),
+})
 
-const main = async () => {
-  const server = new ApolloServer({ 
-    schema,
-    playground: env.apollo.playground, 
-    introspection: env.apollo.introspection 
-  });
-
-  server.listen({ port: env.port }).then(({ url }) => 
-  console.log(`Server started on URL: ${url}`)
-  );
-};
-
-main().catch((err) => {
-  console.log(err);
-});
-
-if(module.hot) {
-  module.hot.accept();
-  module.hot.dispose(() => console.log('Module disposed.'));
-}
+server.start(
+  () => console.log(`GraphQL server is running on http://localhost:4000`)
+)

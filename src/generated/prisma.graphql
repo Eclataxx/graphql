@@ -1,0 +1,1655 @@
+type Address {
+  id: ID!
+  city: String!
+  country: String!
+  postalCode: String!
+  state: String!
+  streetAddress: String!
+  additionalStreetAddress: String!
+  associatedUser: User
+}
+
+type AddressConnection {
+  pageInfo: PageInfo!
+  edges: [AddressEdge]!
+  aggregate: AggregateAddress!
+}
+
+input AddressCreateInput {
+  id: ID
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+  associatedUser: UserCreateOneWithoutAddressInput
+}
+
+input AddressCreateOneWithoutAssociatedUserInput {
+  create: AddressCreateWithoutAssociatedUserInput
+  connect: AddressWhereUniqueInput
+}
+
+input AddressCreateWithoutAssociatedUserInput {
+  id: ID
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+}
+
+type AddressEdge {
+  node: Address!
+  cursor: String!
+}
+
+enum AddressOrderByInput {
+  id_ASC
+  id_DESC
+  city_ASC
+  city_DESC
+  country_ASC
+  country_DESC
+  postalCode_ASC
+  postalCode_DESC
+  state_ASC
+  state_DESC
+  streetAddress_ASC
+  streetAddress_DESC
+  additionalStreetAddress_ASC
+  additionalStreetAddress_DESC
+}
+
+type AddressPreviousValues {
+  id: ID!
+  city: String!
+  country: String!
+  postalCode: String!
+  state: String!
+  streetAddress: String!
+  additionalStreetAddress: String!
+}
+
+type AddressSubscriptionPayload {
+  mutation: MutationType!
+  node: Address
+  updatedFields: [String!]
+  previousValues: AddressPreviousValues
+}
+
+input AddressSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: AddressWhereInput
+  AND: [AddressSubscriptionWhereInput!]
+  OR: [AddressSubscriptionWhereInput!]
+  NOT: [AddressSubscriptionWhereInput!]
+}
+
+input AddressUpdateInput {
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+  associatedUser: UserUpdateOneWithoutAddressInput
+}
+
+input AddressUpdateManyMutationInput {
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+}
+
+input AddressUpdateOneWithoutAssociatedUserInput {
+  create: AddressCreateWithoutAssociatedUserInput
+  update: AddressUpdateWithoutAssociatedUserDataInput
+  upsert: AddressUpsertWithoutAssociatedUserInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: AddressWhereUniqueInput
+}
+
+input AddressUpdateWithoutAssociatedUserDataInput {
+  city: String
+  country: String
+  postalCode: String
+  state: String
+  streetAddress: String
+  additionalStreetAddress: String
+}
+
+input AddressUpsertWithoutAssociatedUserInput {
+  update: AddressUpdateWithoutAssociatedUserDataInput!
+  create: AddressCreateWithoutAssociatedUserInput!
+}
+
+input AddressWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
+  postalCode: String
+  postalCode_not: String
+  postalCode_in: [String!]
+  postalCode_not_in: [String!]
+  postalCode_lt: String
+  postalCode_lte: String
+  postalCode_gt: String
+  postalCode_gte: String
+  postalCode_contains: String
+  postalCode_not_contains: String
+  postalCode_starts_with: String
+  postalCode_not_starts_with: String
+  postalCode_ends_with: String
+  postalCode_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_lt: String
+  state_lte: String
+  state_gt: String
+  state_gte: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  streetAddress: String
+  streetAddress_not: String
+  streetAddress_in: [String!]
+  streetAddress_not_in: [String!]
+  streetAddress_lt: String
+  streetAddress_lte: String
+  streetAddress_gt: String
+  streetAddress_gte: String
+  streetAddress_contains: String
+  streetAddress_not_contains: String
+  streetAddress_starts_with: String
+  streetAddress_not_starts_with: String
+  streetAddress_ends_with: String
+  streetAddress_not_ends_with: String
+  additionalStreetAddress: String
+  additionalStreetAddress_not: String
+  additionalStreetAddress_in: [String!]
+  additionalStreetAddress_not_in: [String!]
+  additionalStreetAddress_lt: String
+  additionalStreetAddress_lte: String
+  additionalStreetAddress_gt: String
+  additionalStreetAddress_gte: String
+  additionalStreetAddress_contains: String
+  additionalStreetAddress_not_contains: String
+  additionalStreetAddress_starts_with: String
+  additionalStreetAddress_not_starts_with: String
+  additionalStreetAddress_ends_with: String
+  additionalStreetAddress_not_ends_with: String
+  associatedUser: UserWhereInput
+  AND: [AddressWhereInput!]
+  OR: [AddressWhereInput!]
+  NOT: [AddressWhereInput!]
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
+
+type AggregateAddress {
+  count: Int!
+}
+
+type AggregateCart {
+  count: Int!
+}
+
+type AggregateOrder {
+  count: Int!
+}
+
+type AggregateProduct {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+type Cart {
+  id: ID!
+  price: Int!
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
+  relatedUser: User
+}
+
+type CartConnection {
+  pageInfo: PageInfo!
+  edges: [CartEdge]!
+  aggregate: AggregateCart!
+}
+
+input CartCreateInput {
+  id: ID
+  price: Int!
+  products: ProductCreateManyWithoutCartsInput
+  relatedUser: UserCreateOneWithoutCartInput
+}
+
+input CartCreateManyWithoutProductsInput {
+  create: [CartCreateWithoutProductsInput!]
+  connect: [CartWhereUniqueInput!]
+}
+
+input CartCreateOneWithoutRelatedUserInput {
+  create: CartCreateWithoutRelatedUserInput
+  connect: CartWhereUniqueInput
+}
+
+input CartCreateWithoutProductsInput {
+  id: ID
+  price: Int!
+  relatedUser: UserCreateOneWithoutCartInput
+}
+
+input CartCreateWithoutRelatedUserInput {
+  id: ID
+  price: Int!
+  products: ProductCreateManyWithoutCartsInput
+}
+
+type CartEdge {
+  node: Cart!
+  cursor: String!
+}
+
+enum CartOrderByInput {
+  id_ASC
+  id_DESC
+  price_ASC
+  price_DESC
+}
+
+type CartPreviousValues {
+  id: ID!
+  price: Int!
+}
+
+input CartScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  AND: [CartScalarWhereInput!]
+  OR: [CartScalarWhereInput!]
+  NOT: [CartScalarWhereInput!]
+}
+
+type CartSubscriptionPayload {
+  mutation: MutationType!
+  node: Cart
+  updatedFields: [String!]
+  previousValues: CartPreviousValues
+}
+
+input CartSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CartWhereInput
+  AND: [CartSubscriptionWhereInput!]
+  OR: [CartSubscriptionWhereInput!]
+  NOT: [CartSubscriptionWhereInput!]
+}
+
+input CartUpdateInput {
+  price: Int
+  products: ProductUpdateManyWithoutCartsInput
+  relatedUser: UserUpdateOneWithoutCartInput
+}
+
+input CartUpdateManyDataInput {
+  price: Int
+}
+
+input CartUpdateManyMutationInput {
+  price: Int
+}
+
+input CartUpdateManyWithoutProductsInput {
+  create: [CartCreateWithoutProductsInput!]
+  delete: [CartWhereUniqueInput!]
+  connect: [CartWhereUniqueInput!]
+  set: [CartWhereUniqueInput!]
+  disconnect: [CartWhereUniqueInput!]
+  update: [CartUpdateWithWhereUniqueWithoutProductsInput!]
+  upsert: [CartUpsertWithWhereUniqueWithoutProductsInput!]
+  deleteMany: [CartScalarWhereInput!]
+  updateMany: [CartUpdateManyWithWhereNestedInput!]
+}
+
+input CartUpdateManyWithWhereNestedInput {
+  where: CartScalarWhereInput!
+  data: CartUpdateManyDataInput!
+}
+
+input CartUpdateOneWithoutRelatedUserInput {
+  create: CartCreateWithoutRelatedUserInput
+  update: CartUpdateWithoutRelatedUserDataInput
+  upsert: CartUpsertWithoutRelatedUserInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: CartWhereUniqueInput
+}
+
+input CartUpdateWithoutProductsDataInput {
+  price: Int
+  relatedUser: UserUpdateOneWithoutCartInput
+}
+
+input CartUpdateWithoutRelatedUserDataInput {
+  price: Int
+  products: ProductUpdateManyWithoutCartsInput
+}
+
+input CartUpdateWithWhereUniqueWithoutProductsInput {
+  where: CartWhereUniqueInput!
+  data: CartUpdateWithoutProductsDataInput!
+}
+
+input CartUpsertWithoutRelatedUserInput {
+  update: CartUpdateWithoutRelatedUserDataInput!
+  create: CartCreateWithoutRelatedUserInput!
+}
+
+input CartUpsertWithWhereUniqueWithoutProductsInput {
+  where: CartWhereUniqueInput!
+  update: CartUpdateWithoutProductsDataInput!
+  create: CartCreateWithoutProductsInput!
+}
+
+input CartWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+  relatedUser: UserWhereInput
+  AND: [CartWhereInput!]
+  OR: [CartWhereInput!]
+  NOT: [CartWhereInput!]
+}
+
+input CartWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+scalar Long
+
+type Mutation {
+  createAddress(data: AddressCreateInput!): Address!
+  updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
+  updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
+  upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
+  deleteAddress(where: AddressWhereUniqueInput!): Address
+  deleteManyAddresses(where: AddressWhereInput): BatchPayload!
+  createCart(data: CartCreateInput!): Cart!
+  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart
+  updateManyCarts(data: CartUpdateManyMutationInput!, where: CartWhereInput): BatchPayload!
+  upsertCart(where: CartWhereUniqueInput!, create: CartCreateInput!, update: CartUpdateInput!): Cart!
+  deleteCart(where: CartWhereUniqueInput!): Cart
+  deleteManyCarts(where: CartWhereInput): BatchPayload!
+  createOrder(data: OrderCreateInput!): Order!
+  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order
+  updateManyOrders(data: OrderUpdateManyMutationInput!, where: OrderWhereInput): BatchPayload!
+  upsertOrder(where: OrderWhereUniqueInput!, create: OrderCreateInput!, update: OrderUpdateInput!): Order!
+  deleteOrder(where: OrderWhereUniqueInput!): Order
+  deleteManyOrders(where: OrderWhereInput): BatchPayload!
+  createProduct(data: ProductCreateInput!): Product!
+  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
+  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type Order {
+  id: ID!
+  price: Int!
+  date: DateTime!
+  status: OrderStatus!
+  associatedUser: User
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
+}
+
+type OrderConnection {
+  pageInfo: PageInfo!
+  edges: [OrderEdge]!
+  aggregate: AggregateOrder!
+}
+
+input OrderCreateInput {
+  id: ID
+  price: Int!
+  date: DateTime!
+  status: OrderStatus
+  associatedUser: UserCreateOneWithoutOrdersInput
+  products: ProductCreateManyWithoutOrdersInput
+}
+
+input OrderCreateManyWithoutAssociatedUserInput {
+  create: [OrderCreateWithoutAssociatedUserInput!]
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderCreateManyWithoutProductsInput {
+  create: [OrderCreateWithoutProductsInput!]
+  connect: [OrderWhereUniqueInput!]
+}
+
+input OrderCreateWithoutAssociatedUserInput {
+  id: ID
+  price: Int!
+  date: DateTime!
+  status: OrderStatus
+  products: ProductCreateManyWithoutOrdersInput
+}
+
+input OrderCreateWithoutProductsInput {
+  id: ID
+  price: Int!
+  date: DateTime!
+  status: OrderStatus
+  associatedUser: UserCreateOneWithoutOrdersInput
+}
+
+type OrderEdge {
+  node: Order!
+  cursor: String!
+}
+
+enum OrderOrderByInput {
+  id_ASC
+  id_DESC
+  price_ASC
+  price_DESC
+  date_ASC
+  date_DESC
+  status_ASC
+  status_DESC
+}
+
+type OrderPreviousValues {
+  id: ID!
+  price: Int!
+  date: DateTime!
+  status: OrderStatus!
+}
+
+input OrderScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  status: OrderStatus
+  status_not: OrderStatus
+  status_in: [OrderStatus!]
+  status_not_in: [OrderStatus!]
+  AND: [OrderScalarWhereInput!]
+  OR: [OrderScalarWhereInput!]
+  NOT: [OrderScalarWhereInput!]
+}
+
+enum OrderStatus {
+  DELIVERED
+  ORDERED
+  CANCELLED
+}
+
+type OrderSubscriptionPayload {
+  mutation: MutationType!
+  node: Order
+  updatedFields: [String!]
+  previousValues: OrderPreviousValues
+}
+
+input OrderSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OrderWhereInput
+  AND: [OrderSubscriptionWhereInput!]
+  OR: [OrderSubscriptionWhereInput!]
+  NOT: [OrderSubscriptionWhereInput!]
+}
+
+input OrderUpdateInput {
+  price: Int
+  date: DateTime
+  status: OrderStatus
+  associatedUser: UserUpdateOneWithoutOrdersInput
+  products: ProductUpdateManyWithoutOrdersInput
+}
+
+input OrderUpdateManyDataInput {
+  price: Int
+  date: DateTime
+  status: OrderStatus
+}
+
+input OrderUpdateManyMutationInput {
+  price: Int
+  date: DateTime
+  status: OrderStatus
+}
+
+input OrderUpdateManyWithoutAssociatedUserInput {
+  create: [OrderCreateWithoutAssociatedUserInput!]
+  delete: [OrderWhereUniqueInput!]
+  connect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  update: [OrderUpdateWithWhereUniqueWithoutAssociatedUserInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutAssociatedUserInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  updateMany: [OrderUpdateManyWithWhereNestedInput!]
+}
+
+input OrderUpdateManyWithoutProductsInput {
+  create: [OrderCreateWithoutProductsInput!]
+  delete: [OrderWhereUniqueInput!]
+  connect: [OrderWhereUniqueInput!]
+  set: [OrderWhereUniqueInput!]
+  disconnect: [OrderWhereUniqueInput!]
+  update: [OrderUpdateWithWhereUniqueWithoutProductsInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutProductsInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  updateMany: [OrderUpdateManyWithWhereNestedInput!]
+}
+
+input OrderUpdateManyWithWhereNestedInput {
+  where: OrderScalarWhereInput!
+  data: OrderUpdateManyDataInput!
+}
+
+input OrderUpdateWithoutAssociatedUserDataInput {
+  price: Int
+  date: DateTime
+  status: OrderStatus
+  products: ProductUpdateManyWithoutOrdersInput
+}
+
+input OrderUpdateWithoutProductsDataInput {
+  price: Int
+  date: DateTime
+  status: OrderStatus
+  associatedUser: UserUpdateOneWithoutOrdersInput
+}
+
+input OrderUpdateWithWhereUniqueWithoutAssociatedUserInput {
+  where: OrderWhereUniqueInput!
+  data: OrderUpdateWithoutAssociatedUserDataInput!
+}
+
+input OrderUpdateWithWhereUniqueWithoutProductsInput {
+  where: OrderWhereUniqueInput!
+  data: OrderUpdateWithoutProductsDataInput!
+}
+
+input OrderUpsertWithWhereUniqueWithoutAssociatedUserInput {
+  where: OrderWhereUniqueInput!
+  update: OrderUpdateWithoutAssociatedUserDataInput!
+  create: OrderCreateWithoutAssociatedUserInput!
+}
+
+input OrderUpsertWithWhereUniqueWithoutProductsInput {
+  where: OrderWhereUniqueInput!
+  update: OrderUpdateWithoutProductsDataInput!
+  create: OrderCreateWithoutProductsInput!
+}
+
+input OrderWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  status: OrderStatus
+  status_not: OrderStatus
+  status_in: [OrderStatus!]
+  status_not_in: [OrderStatus!]
+  associatedUser: UserWhereInput
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  NOT: [OrderWhereInput!]
+}
+
+input OrderWhereUniqueInput {
+  id: ID
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
+  submittedBy: User
+  validatedBy: User
+  description: String!
+  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart!]
+}
+
+type ProductConnection {
+  pageInfo: PageInfo!
+  edges: [ProductEdge]!
+  aggregate: AggregateProduct!
+}
+
+input ProductCreateInput {
+  id: ID
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders: OrderCreateManyWithoutProductsInput
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
+  description: String!
+  carts: CartCreateManyWithoutProductsInput
+}
+
+input ProductCreateManyWithoutCartsInput {
+  create: [ProductCreateWithoutCartsInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input ProductCreateManyWithoutOrdersInput {
+  create: [ProductCreateWithoutOrdersInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input ProductCreateManyWithoutSubmittedByInput {
+  create: [ProductCreateWithoutSubmittedByInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input ProductCreateManyWithoutValidatedByInput {
+  create: [ProductCreateWithoutValidatedByInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input ProductCreateWithoutCartsInput {
+  id: ID
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders: OrderCreateManyWithoutProductsInput
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
+  description: String!
+}
+
+input ProductCreateWithoutOrdersInput {
+  id: ID
+  name: String!
+  price: Int!
+  status: ProductStatus
+  submittedBy: UserCreateOneWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
+  description: String!
+  carts: CartCreateManyWithoutProductsInput
+}
+
+input ProductCreateWithoutSubmittedByInput {
+  id: ID
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders: OrderCreateManyWithoutProductsInput
+  validatedBy: UserCreateOneWithoutValidatedProductsInput
+  description: String!
+  carts: CartCreateManyWithoutProductsInput
+}
+
+input ProductCreateWithoutValidatedByInput {
+  id: ID
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders: OrderCreateManyWithoutProductsInput
+  submittedBy: UserCreateOneWithoutProductsInput
+  description: String!
+  carts: CartCreateManyWithoutProductsInput
+}
+
+type ProductEdge {
+  node: Product!
+  cursor: String!
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  status_ASC
+  status_DESC
+  description_ASC
+  description_DESC
+}
+
+type ProductPreviousValues {
+  id: ID!
+  name: String!
+  price: Int!
+  status: ProductStatus
+  description: String!
+}
+
+input ProductScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  status: ProductStatus
+  status_not: ProductStatus
+  status_in: [ProductStatus!]
+  status_not_in: [ProductStatus!]
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  AND: [ProductScalarWhereInput!]
+  OR: [ProductScalarWhereInput!]
+  NOT: [ProductScalarWhereInput!]
+}
+
+enum ProductStatus {
+  VERIFIED
+  TO_REVIEW
+  DENIED
+}
+
+type ProductSubscriptionPayload {
+  mutation: MutationType!
+  node: Product
+  updatedFields: [String!]
+  previousValues: ProductPreviousValues
+}
+
+input ProductSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProductWhereInput
+  AND: [ProductSubscriptionWhereInput!]
+  OR: [ProductSubscriptionWhereInput!]
+  NOT: [ProductSubscriptionWhereInput!]
+}
+
+input ProductUpdateInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  orders: OrderUpdateManyWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  description: String
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateManyDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+}
+
+input ProductUpdateManyMutationInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+}
+
+input ProductUpdateManyWithoutCartsInput {
+  create: [ProductCreateWithoutCartsInput!]
+  delete: [ProductWhereUniqueInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutCartsInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutCartsInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+}
+
+input ProductUpdateManyWithoutOrdersInput {
+  create: [ProductCreateWithoutOrdersInput!]
+  delete: [ProductWhereUniqueInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutOrdersInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutOrdersInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+}
+
+input ProductUpdateManyWithoutSubmittedByInput {
+  create: [ProductCreateWithoutSubmittedByInput!]
+  delete: [ProductWhereUniqueInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutSubmittedByInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutSubmittedByInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+}
+
+input ProductUpdateManyWithoutValidatedByInput {
+  create: [ProductCreateWithoutValidatedByInput!]
+  delete: [ProductWhereUniqueInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutValidatedByInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutValidatedByInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+}
+
+input ProductUpdateManyWithWhereNestedInput {
+  where: ProductScalarWhereInput!
+  data: ProductUpdateManyDataInput!
+}
+
+input ProductUpdateWithoutCartsDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  orders: OrderUpdateManyWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  description: String
+}
+
+input ProductUpdateWithoutOrdersDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  description: String
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateWithoutSubmittedByDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  orders: OrderUpdateManyWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  description: String
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateWithoutValidatedByDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  orders: OrderUpdateManyWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  description: String
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateWithWhereUniqueWithoutCartsInput {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateWithoutCartsDataInput!
+}
+
+input ProductUpdateWithWhereUniqueWithoutOrdersInput {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateWithoutOrdersDataInput!
+}
+
+input ProductUpdateWithWhereUniqueWithoutSubmittedByInput {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateWithoutSubmittedByDataInput!
+}
+
+input ProductUpdateWithWhereUniqueWithoutValidatedByInput {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateWithoutValidatedByDataInput!
+}
+
+input ProductUpsertWithWhereUniqueWithoutCartsInput {
+  where: ProductWhereUniqueInput!
+  update: ProductUpdateWithoutCartsDataInput!
+  create: ProductCreateWithoutCartsInput!
+}
+
+input ProductUpsertWithWhereUniqueWithoutOrdersInput {
+  where: ProductWhereUniqueInput!
+  update: ProductUpdateWithoutOrdersDataInput!
+  create: ProductCreateWithoutOrdersInput!
+}
+
+input ProductUpsertWithWhereUniqueWithoutSubmittedByInput {
+  where: ProductWhereUniqueInput!
+  update: ProductUpdateWithoutSubmittedByDataInput!
+  create: ProductCreateWithoutSubmittedByInput!
+}
+
+input ProductUpsertWithWhereUniqueWithoutValidatedByInput {
+  where: ProductWhereUniqueInput!
+  update: ProductUpdateWithoutValidatedByDataInput!
+  create: ProductCreateWithoutValidatedByInput!
+}
+
+input ProductWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  status: ProductStatus
+  status_not: ProductStatus
+  status_in: [ProductStatus!]
+  status_not_in: [ProductStatus!]
+  orders_every: OrderWhereInput
+  orders_some: OrderWhereInput
+  orders_none: OrderWhereInput
+  submittedBy: UserWhereInput
+  validatedBy: UserWhereInput
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  carts_every: CartWhereInput
+  carts_some: CartWhereInput
+  carts_none: CartWhereInput
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  address(where: AddressWhereUniqueInput!): Address
+  addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
+  addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
+  cart(where: CartWhereUniqueInput!): Cart
+  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart]!
+  cartsConnection(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartConnection!
+  order(where: OrderWhereUniqueInput!): Order
+  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order]!
+  ordersConnection(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrderConnection!
+  product(where: ProductWhereUniqueInput!): Product
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
+}
+
+enum Role {
+  ROLE_USER
+  ROLE_SELLER
+  ROLE_ADMIN
+}
+
+type Subscription {
+  address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
+  cart(where: CartSubscriptionWhereInput): CartSubscriptionPayload
+  order(where: OrderSubscriptionWhereInput): OrderSubscriptionPayload
+  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  username: String!
+  roles: Role!
+  password: String!
+  email: String!
+  address: Address
+  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
+  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
+  validatedProducts(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
+  cart: Cart
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  address: AddressCreateOneWithoutAssociatedUserInput
+  orders: OrderCreateManyWithoutAssociatedUserInput
+  products: ProductCreateManyWithoutSubmittedByInput
+  validatedProducts: ProductCreateManyWithoutValidatedByInput
+  cart: CartCreateOneWithoutRelatedUserInput
+}
+
+input UserCreateOneWithoutAddressInput {
+  create: UserCreateWithoutAddressInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCartInput {
+  create: UserCreateWithoutCartInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutOrdersInput {
+  create: UserCreateWithoutOrdersInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutProductsInput {
+  create: UserCreateWithoutProductsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutValidatedProductsInput {
+  create: UserCreateWithoutValidatedProductsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutAddressInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  orders: OrderCreateManyWithoutAssociatedUserInput
+  products: ProductCreateManyWithoutSubmittedByInput
+  validatedProducts: ProductCreateManyWithoutValidatedByInput
+  cart: CartCreateOneWithoutRelatedUserInput
+}
+
+input UserCreateWithoutCartInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  address: AddressCreateOneWithoutAssociatedUserInput
+  orders: OrderCreateManyWithoutAssociatedUserInput
+  products: ProductCreateManyWithoutSubmittedByInput
+  validatedProducts: ProductCreateManyWithoutValidatedByInput
+}
+
+input UserCreateWithoutOrdersInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  address: AddressCreateOneWithoutAssociatedUserInput
+  products: ProductCreateManyWithoutSubmittedByInput
+  validatedProducts: ProductCreateManyWithoutValidatedByInput
+  cart: CartCreateOneWithoutRelatedUserInput
+}
+
+input UserCreateWithoutProductsInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  address: AddressCreateOneWithoutAssociatedUserInput
+  orders: OrderCreateManyWithoutAssociatedUserInput
+  validatedProducts: ProductCreateManyWithoutValidatedByInput
+  cart: CartCreateOneWithoutRelatedUserInput
+}
+
+input UserCreateWithoutValidatedProductsInput {
+  id: ID
+  username: String!
+  roles: Role
+  password: String!
+  email: String!
+  address: AddressCreateOneWithoutAssociatedUserInput
+  orders: OrderCreateManyWithoutAssociatedUserInput
+  products: ProductCreateManyWithoutSubmittedByInput
+  cart: CartCreateOneWithoutRelatedUserInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  roles_ASC
+  roles_DESC
+  password_ASC
+  password_DESC
+  email_ASC
+  email_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  username: String!
+  roles: Role!
+  password: String!
+  email: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  address: AddressUpdateOneWithoutAssociatedUserInput
+  orders: OrderUpdateManyWithoutAssociatedUserInput
+  products: ProductUpdateManyWithoutSubmittedByInput
+  validatedProducts: ProductUpdateManyWithoutValidatedByInput
+  cart: CartUpdateOneWithoutRelatedUserInput
+}
+
+input UserUpdateManyMutationInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+}
+
+input UserUpdateOneWithoutAddressInput {
+  create: UserCreateWithoutAddressInput
+  update: UserUpdateWithoutAddressDataInput
+  upsert: UserUpsertWithoutAddressInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutCartInput {
+  create: UserCreateWithoutCartInput
+  update: UserUpdateWithoutCartDataInput
+  upsert: UserUpsertWithoutCartInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutOrdersInput {
+  create: UserCreateWithoutOrdersInput
+  update: UserUpdateWithoutOrdersDataInput
+  upsert: UserUpsertWithoutOrdersInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutProductsInput {
+  create: UserCreateWithoutProductsInput
+  update: UserUpdateWithoutProductsDataInput
+  upsert: UserUpsertWithoutProductsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutValidatedProductsInput {
+  create: UserCreateWithoutValidatedProductsInput
+  update: UserUpdateWithoutValidatedProductsDataInput
+  upsert: UserUpsertWithoutValidatedProductsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutAddressDataInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  orders: OrderUpdateManyWithoutAssociatedUserInput
+  products: ProductUpdateManyWithoutSubmittedByInput
+  validatedProducts: ProductUpdateManyWithoutValidatedByInput
+  cart: CartUpdateOneWithoutRelatedUserInput
+}
+
+input UserUpdateWithoutCartDataInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  address: AddressUpdateOneWithoutAssociatedUserInput
+  orders: OrderUpdateManyWithoutAssociatedUserInput
+  products: ProductUpdateManyWithoutSubmittedByInput
+  validatedProducts: ProductUpdateManyWithoutValidatedByInput
+}
+
+input UserUpdateWithoutOrdersDataInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  address: AddressUpdateOneWithoutAssociatedUserInput
+  products: ProductUpdateManyWithoutSubmittedByInput
+  validatedProducts: ProductUpdateManyWithoutValidatedByInput
+  cart: CartUpdateOneWithoutRelatedUserInput
+}
+
+input UserUpdateWithoutProductsDataInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  address: AddressUpdateOneWithoutAssociatedUserInput
+  orders: OrderUpdateManyWithoutAssociatedUserInput
+  validatedProducts: ProductUpdateManyWithoutValidatedByInput
+  cart: CartUpdateOneWithoutRelatedUserInput
+}
+
+input UserUpdateWithoutValidatedProductsDataInput {
+  username: String
+  roles: Role
+  password: String
+  email: String
+  address: AddressUpdateOneWithoutAssociatedUserInput
+  orders: OrderUpdateManyWithoutAssociatedUserInput
+  products: ProductUpdateManyWithoutSubmittedByInput
+  cart: CartUpdateOneWithoutRelatedUserInput
+}
+
+input UserUpsertWithoutAddressInput {
+  update: UserUpdateWithoutAddressDataInput!
+  create: UserCreateWithoutAddressInput!
+}
+
+input UserUpsertWithoutCartInput {
+  update: UserUpdateWithoutCartDataInput!
+  create: UserCreateWithoutCartInput!
+}
+
+input UserUpsertWithoutOrdersInput {
+  update: UserUpdateWithoutOrdersDataInput!
+  create: UserCreateWithoutOrdersInput!
+}
+
+input UserUpsertWithoutProductsInput {
+  update: UserUpdateWithoutProductsDataInput!
+  create: UserCreateWithoutProductsInput!
+}
+
+input UserUpsertWithoutValidatedProductsInput {
+  update: UserUpdateWithoutValidatedProductsDataInput!
+  create: UserCreateWithoutValidatedProductsInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  roles: Role
+  roles_not: Role
+  roles_in: [Role!]
+  roles_not_in: [Role!]
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  address: AddressWhereInput
+  orders_every: OrderWhereInput
+  orders_some: OrderWhereInput
+  orders_none: OrderWhereInput
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+  validatedProducts_every: ProductWhereInput
+  validatedProducts_some: ProductWhereInput
+  validatedProducts_none: ProductWhereInput
+  cart: CartWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+}
