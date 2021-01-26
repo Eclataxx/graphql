@@ -1,78 +1,77 @@
 type Product {
  id: ID! @id
  name: String!
- price: Float!
- stock: Int!
- status: ProductStatus! @default(value: IN_STOCK)
- user: User! @relation(onDelete: CASCADE)
+ price: Int!
+ status: ProductStatus! @default(value: TO_REVIEW)
+ orders: [Order!]!
+ submittedBy: User! @relation(link: INLINE, onDelete: CASCADE, name: "Submitted")
+ validatedBy: User! @relation(link: INLINE, onDelete: CASCADE, name: "Validated")
+ description: String!
+ carts: [Cart!]!
  createdAt: DateTime! @createdAt
  updatedAt: DateTime! @updatedAt
 }
 
 enum ProductStatus {
-  OUT_OF_STOCK
-  BANNED
-  IN_STOCK
+  VERIFIED
+  TO_REVIEW
+  DENIED
 }
 
 type Order {
  id: ID! @id
- total_price: Float!
- status: OrderStatus! @default(value: PENDING)
- user: User! @relation(onDelete: CASCADE)
- products: [Product!]!
+ price: Int!
+ date: DateTime!
+ status: OrderStatus! @default(value: ORDERED)
+ associatedUser: User! @relation(link: INLINE)
+ products: [Product!]! @relation(link: TABLE)
  createdAt: DateTime! @createdAt
  updatedAt: DateTime! @updatedAt
 }
 
 enum OrderStatus {
-  DONE
-  PENDING
+  DELIVERED
+  ORDERED
   CANCELLED
+}
+
+type Cart {
+  id: ID! @id
+  price: Int!
+  products: [Product!]! @relation(link: TABLE)
+  relatedUser: User!
 }
 
 type Address {
  id: ID! @id
  city: String!
  country: String!
+ postalCode: String!
  state: String!
- Postal_code: String!
+ streetAddress: String!
+ additionalStreetAddress: String!
+ associatedUser: User!
  createdAt: DateTime! @createdAt
  updatedAt: DateTime! @updatedAt
 }
 
-type Validation_Product{
-  id: ID! @id
-  reviewer: User!
-  product: Product! @relation(onDelete: CASCADE)
-  status: ValidationStatus! @default(value: PENDING)
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
-enum ValidationStatus {
-  REJECTED
-  ACCEPTED
-  PENDING
-}
-
 type User {
   id: ID! @id
-  name: String!
-  address: [Address!]!
-  status: UserStatus! @default(value: FINE)
-  roles: Role! @default(value: USER)
+  username: String!
+  roles: Role! @default(value: ROLE_USER)
+  password: String!
+  email: String!
+  address: Address! @relation(link: INLINE)
   orders: [Order!]! 
-  productsOwned: [Product!]! 
+  products: [Product!]! @relation(name: "Submitted")
+  validatedProducts: [Product!]! @relation(name: "Validated")
+  cart: Cart! @relation(link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
-enum Role {
-  USER
-  ADMIN
-}
 
-enum UserStatus {
-  BANNED
-  SUSPENDED
-  FINE
+enum Role {
+  ROLE_USER
+  ROLE_SELLER
+  ROLE_ADMIN
 }
