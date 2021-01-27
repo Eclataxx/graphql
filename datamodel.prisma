@@ -1,7 +1,7 @@
 type User {
   id: ID! @id
   username: String!
-  roles: Role! @default(value: ROLE_USER)
+  roles: [Role]! @scalarList(strategy: RELATION) @default(value: ROLE_USER)
   password: String!
   email: String!
   address: Address @relation(link: INLINE)
