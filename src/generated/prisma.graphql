@@ -1,20 +1,3 @@
-type Address {
-  id: ID!
-  city: String!
-  country: String!
-  postalCode: String!
-  state: String!
-  streetAddress: String!
-  additionalStreetAddress: String!
-  associatedUser: User
-}
-
-type AddressConnection {
-  pageInfo: PageInfo!
-  edges: [AddressEdge]!
-  aggregate: AggregateAddress!
-}
-
 input AddressCreateInput {
   id: ID
   city: String
@@ -41,28 +24,6 @@ input AddressCreateWithoutAssociatedUserInput {
   additionalStreetAddress: String
 }
 
-type AddressEdge {
-  node: Address!
-  cursor: String!
-}
-
-enum AddressOrderByInput {
-  id_ASC
-  id_DESC
-  city_ASC
-  city_DESC
-  country_ASC
-  country_DESC
-  postalCode_ASC
-  postalCode_DESC
-  state_ASC
-  state_DESC
-  streetAddress_ASC
-  streetAddress_DESC
-  additionalStreetAddress_ASC
-  additionalStreetAddress_DESC
-}
-
 type AddressPreviousValues {
   id: ID!
   city: String!
@@ -81,14 +42,27 @@ type AddressSubscriptionPayload {
 }
 
 input AddressSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [AddressSubscriptionWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [AddressSubscriptionWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [AddressSubscriptionWhereInput!]
+
+  # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
+
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
   updatedFields_contains: String
+
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
   updatedFields_contains_every: [String!]
+
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
   node: AddressWhereInput
-  AND: [AddressSubscriptionWhereInput!]
-  OR: [AddressSubscriptionWhereInput!]
-  NOT: [AddressSubscriptionWhereInput!]
 }
 
 input AddressUpdateInput {
@@ -112,11 +86,11 @@ input AddressUpdateManyMutationInput {
 
 input AddressUpdateOneWithoutAssociatedUserInput {
   create: AddressCreateWithoutAssociatedUserInput
+  connect: AddressWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: AddressUpdateWithoutAssociatedUserDataInput
   upsert: AddressUpsertWithoutAssociatedUserInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: AddressWhereUniqueInput
 }
 
 input AddressUpdateWithoutAssociatedUserDataInput {
@@ -133,150 +107,10 @@ input AddressUpsertWithoutAssociatedUserInput {
   create: AddressCreateWithoutAssociatedUserInput!
 }
 
-input AddressWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  city: String
-  city_not: String
-  city_in: [String!]
-  city_not_in: [String!]
-  city_lt: String
-  city_lte: String
-  city_gt: String
-  city_gte: String
-  city_contains: String
-  city_not_contains: String
-  city_starts_with: String
-  city_not_starts_with: String
-  city_ends_with: String
-  city_not_ends_with: String
-  country: String
-  country_not: String
-  country_in: [String!]
-  country_not_in: [String!]
-  country_lt: String
-  country_lte: String
-  country_gt: String
-  country_gte: String
-  country_contains: String
-  country_not_contains: String
-  country_starts_with: String
-  country_not_starts_with: String
-  country_ends_with: String
-  country_not_ends_with: String
-  postalCode: String
-  postalCode_not: String
-  postalCode_in: [String!]
-  postalCode_not_in: [String!]
-  postalCode_lt: String
-  postalCode_lte: String
-  postalCode_gt: String
-  postalCode_gte: String
-  postalCode_contains: String
-  postalCode_not_contains: String
-  postalCode_starts_with: String
-  postalCode_not_starts_with: String
-  postalCode_ends_with: String
-  postalCode_not_ends_with: String
-  state: String
-  state_not: String
-  state_in: [String!]
-  state_not_in: [String!]
-  state_lt: String
-  state_lte: String
-  state_gt: String
-  state_gte: String
-  state_contains: String
-  state_not_contains: String
-  state_starts_with: String
-  state_not_starts_with: String
-  state_ends_with: String
-  state_not_ends_with: String
-  streetAddress: String
-  streetAddress_not: String
-  streetAddress_in: [String!]
-  streetAddress_not_in: [String!]
-  streetAddress_lt: String
-  streetAddress_lte: String
-  streetAddress_gt: String
-  streetAddress_gte: String
-  streetAddress_contains: String
-  streetAddress_not_contains: String
-  streetAddress_starts_with: String
-  streetAddress_not_starts_with: String
-  streetAddress_ends_with: String
-  streetAddress_not_ends_with: String
-  additionalStreetAddress: String
-  additionalStreetAddress_not: String
-  additionalStreetAddress_in: [String!]
-  additionalStreetAddress_not_in: [String!]
-  additionalStreetAddress_lt: String
-  additionalStreetAddress_lte: String
-  additionalStreetAddress_gt: String
-  additionalStreetAddress_gte: String
-  additionalStreetAddress_contains: String
-  additionalStreetAddress_not_contains: String
-  additionalStreetAddress_starts_with: String
-  additionalStreetAddress_not_starts_with: String
-  additionalStreetAddress_ends_with: String
-  additionalStreetAddress_not_ends_with: String
-  associatedUser: UserWhereInput
-  AND: [AddressWhereInput!]
-  OR: [AddressWhereInput!]
-  NOT: [AddressWhereInput!]
-}
-
-input AddressWhereUniqueInput {
-  id: ID
-}
-
-type AggregateAddress {
-  count: Int!
-}
-
-type AggregateCart {
-  count: Int!
-}
-
-type AggregateOrder {
-  count: Int!
-}
-
-type AggregateProduct {
-  count: Int!
-}
-
-type AggregateUser {
-  count: Int!
-}
-
+#
 type BatchPayload {
+  # The number of nodes that have been affected by the Batch operation.
   count: Long!
-}
-
-type Cart {
-  id: ID!
-  price: Int!
-  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  relatedUser: User
-}
-
-type CartConnection {
-  pageInfo: PageInfo!
-  edges: [CartEdge]!
-  aggregate: AggregateCart!
 }
 
 input CartCreateInput {
@@ -308,49 +142,86 @@ input CartCreateWithoutRelatedUserInput {
   products: ProductCreateManyWithoutCartsInput
 }
 
-type CartEdge {
-  node: Cart!
-  cursor: String!
-}
-
-enum CartOrderByInput {
-  id_ASC
-  id_DESC
-  price_ASC
-  price_DESC
-}
-
 type CartPreviousValues {
   id: ID!
   price: Int!
 }
 
 input CartScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
+  # Logical AND on all given filters.
   AND: [CartScalarWhereInput!]
+
+  # Logical OR on all given filters.
   OR: [CartScalarWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
   NOT: [CartScalarWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
 }
 
 type CartSubscriptionPayload {
@@ -361,14 +232,27 @@ type CartSubscriptionPayload {
 }
 
 input CartSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [CartSubscriptionWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [CartSubscriptionWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [CartSubscriptionWhereInput!]
+
+  # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
+
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
   updatedFields_contains: String
+
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
   updatedFields_contains_every: [String!]
+
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
   node: CartWhereInput
-  AND: [CartSubscriptionWhereInput!]
-  OR: [CartSubscriptionWhereInput!]
-  NOT: [CartSubscriptionWhereInput!]
 }
 
 input CartUpdateInput {
@@ -385,30 +269,35 @@ input CartUpdateManyMutationInput {
   price: Int
 }
 
-input CartUpdateManyWithoutProductsInput {
-  create: [CartCreateWithoutProductsInput!]
-  delete: [CartWhereUniqueInput!]
-  connect: [CartWhereUniqueInput!]
-  set: [CartWhereUniqueInput!]
-  disconnect: [CartWhereUniqueInput!]
-  update: [CartUpdateWithWhereUniqueWithoutProductsInput!]
-  upsert: [CartUpsertWithWhereUniqueWithoutProductsInput!]
-  deleteMany: [CartScalarWhereInput!]
-  updateMany: [CartUpdateManyWithWhereNestedInput!]
-}
-
 input CartUpdateManyWithWhereNestedInput {
   where: CartScalarWhereInput!
   data: CartUpdateManyDataInput!
 }
 
+input CartUpdateManyWithoutProductsInput {
+  create: [CartCreateWithoutProductsInput!]
+  connect: [CartWhereUniqueInput!]
+  set: [CartWhereUniqueInput!]
+  disconnect: [CartWhereUniqueInput!]
+  delete: [CartWhereUniqueInput!]
+  update: [CartUpdateWithWhereUniqueWithoutProductsInput!]
+  updateMany: [CartUpdateManyWithWhereNestedInput!]
+  deleteMany: [CartScalarWhereInput!]
+  upsert: [CartUpsertWithWhereUniqueWithoutProductsInput!]
+}
+
 input CartUpdateOneWithoutRelatedUserInput {
   create: CartCreateWithoutRelatedUserInput
+  connect: CartWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: CartUpdateWithoutRelatedUserDataInput
   upsert: CartUpsertWithoutRelatedUserInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: CartWhereUniqueInput
+}
+
+input CartUpdateWithWhereUniqueWithoutProductsInput {
+  where: CartWhereUniqueInput!
+  data: CartUpdateWithoutProductsDataInput!
 }
 
 input CartUpdateWithoutProductsDataInput {
@@ -421,9 +310,10 @@ input CartUpdateWithoutRelatedUserDataInput {
   products: ProductUpdateManyWithoutCartsInput
 }
 
-input CartUpdateWithWhereUniqueWithoutProductsInput {
+input CartUpsertWithWhereUniqueWithoutProductsInput {
   where: CartWhereUniqueInput!
-  data: CartUpdateWithoutProductsDataInput!
+  update: CartUpdateWithoutProductsDataInput!
+  create: CartCreateWithoutProductsInput!
 }
 
 input CartUpsertWithoutRelatedUserInput {
@@ -431,108 +321,88 @@ input CartUpsertWithoutRelatedUserInput {
   create: CartCreateWithoutRelatedUserInput!
 }
 
-input CartUpsertWithWhereUniqueWithoutProductsInput {
-  where: CartWhereUniqueInput!
-  update: CartUpdateWithoutProductsDataInput!
-  create: CartCreateWithoutProductsInput!
-}
-
-input CartWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  products_every: ProductWhereInput
-  products_some: ProductWhereInput
-  products_none: ProductWhereInput
-  relatedUser: UserWhereInput
-  AND: [CartWhereInput!]
-  OR: [CartWhereInput!]
-  NOT: [CartWhereInput!]
-}
-
-input CartWhereUniqueInput {
-  id: ID
-}
-
-scalar DateTime
-
-scalar Long
+# Raw JSON value
+scalar Json
 
 type Mutation {
-  createAddress(data: AddressCreateInput!): Address!
-  updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
-  updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
-  upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
-  deleteAddress(where: AddressWhereUniqueInput!): Address
-  deleteManyAddresses(where: AddressWhereInput): BatchPayload!
-  createCart(data: CartCreateInput!): Cart!
-  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart
-  updateManyCarts(data: CartUpdateManyMutationInput!, where: CartWhereInput): BatchPayload!
-  upsertCart(where: CartWhereUniqueInput!, create: CartCreateInput!, update: CartUpdateInput!): Cart!
-  deleteCart(where: CartWhereUniqueInput!): Cart
-  deleteManyCarts(where: CartWhereInput): BatchPayload!
-  createOrder(data: OrderCreateInput!): Order!
-  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order
-  updateManyOrders(data: OrderUpdateManyMutationInput!, where: OrderWhereInput): BatchPayload!
-  upsertOrder(where: OrderWhereUniqueInput!, create: OrderCreateInput!, update: OrderUpdateInput!): Order!
-  deleteOrder(where: OrderWhereUniqueInput!): Order
-  deleteManyOrders(where: OrderWhereInput): BatchPayload!
-  createProduct(data: ProductCreateInput!): Product!
-  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
-  updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
-  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
-  deleteProduct(where: ProductWhereUniqueInput!): Product
-  deleteManyProducts(where: ProductWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
+  createProduct(data: ProductCreateInput!): Product!
+  createOrder(data: OrderCreateInput!): Order!
+  createCart(data: CartCreateInput!): Cart!
+  createAddress(data: AddressCreateInput!): Address!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateProduct(
+    data: ProductUpdateInput!
+    where: ProductWhereUniqueInput!
+  ): Product
+  updateOrder(data: OrderUpdateInput!, where: OrderWhereUniqueInput!): Order
+  updateCart(data: CartUpdateInput!, where: CartWhereUniqueInput!): Cart
+  updateAddress(
+    data: AddressUpdateInput!
+    where: AddressWhereUniqueInput!
+  ): Address
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteOrder(where: OrderWhereUniqueInput!): Order
+  deleteCart(where: CartWhereUniqueInput!): Cart
+  deleteAddress(where: AddressWhereUniqueInput!): Address
+  upsertUser(
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+  ): User!
+  upsertProduct(
+    where: ProductWhereUniqueInput!
+    create: ProductCreateInput!
+    update: ProductUpdateInput!
+  ): Product!
+  upsertOrder(
+    where: OrderWhereUniqueInput!
+    create: OrderCreateInput!
+    update: OrderUpdateInput!
+  ): Order!
+  upsertCart(
+    where: CartWhereUniqueInput!
+    create: CartCreateInput!
+    update: CartUpdateInput!
+  ): Cart!
+  upsertAddress(
+    where: AddressWhereUniqueInput!
+    create: AddressCreateInput!
+    update: AddressUpdateInput!
+  ): Address!
+  updateManyUsers(
+    data: UserUpdateManyMutationInput!
+    where: UserWhereInput
+  ): BatchPayload!
+  updateManyProducts(
+    data: ProductUpdateManyMutationInput!
+    where: ProductWhereInput
+  ): BatchPayload!
+  updateManyOrders(
+    data: OrderUpdateManyMutationInput!
+    where: OrderWhereInput
+  ): BatchPayload!
+  updateManyCarts(
+    data: CartUpdateManyMutationInput!
+    where: CartWhereInput
+  ): BatchPayload!
+  updateManyAddresses(
+    data: AddressUpdateManyMutationInput!
+    where: AddressWhereInput
+  ): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  deleteManyOrders(where: OrderWhereInput): BatchPayload!
+  deleteManyCarts(where: CartWhereInput): BatchPayload!
+  deleteManyAddresses(where: AddressWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
   CREATED
   UPDATED
   DELETED
-}
-
-interface Node {
-  id: ID!
-}
-
-type Order {
-  id: ID!
-  price: Int!
-  date: DateTime!
-  status: OrderStatus!
-  associatedUser: User
-  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-}
-
-type OrderConnection {
-  pageInfo: PageInfo!
-  edges: [OrderEdge]!
-  aggregate: AggregateOrder!
 }
 
 input OrderCreateInput {
@@ -570,22 +440,6 @@ input OrderCreateWithoutProductsInput {
   associatedUser: UserCreateOneWithoutOrdersInput
 }
 
-type OrderEdge {
-  node: Order!
-  cursor: String!
-}
-
-enum OrderOrderByInput {
-  id_ASC
-  id_DESC
-  price_ASC
-  price_DESC
-  date_ASC
-  date_DESC
-  status_ASC
-  status_DESC
-}
-
 type OrderPreviousValues {
   id: ID!
   price: Int!
@@ -594,49 +448,116 @@ type OrderPreviousValues {
 }
 
 input OrderScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
-  status: OrderStatus
-  status_not: OrderStatus
-  status_in: [OrderStatus!]
-  status_not_in: [OrderStatus!]
+  # Logical AND on all given filters.
   AND: [OrderScalarWhereInput!]
-  OR: [OrderScalarWhereInput!]
-  NOT: [OrderScalarWhereInput!]
-}
 
-enum OrderStatus {
-  DELIVERED
-  ORDERED
-  CANCELLED
+  # Logical OR on all given filters.
+  OR: [OrderScalarWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [OrderScalarWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
+
+  #
+  date: DateTime
+
+  # All values that are not equal to given value.
+  date_not: DateTime
+
+  # All values that are contained in given list.
+  date_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  date_not_in: [DateTime!]
+
+  # All values less than the given value.
+  date_lt: DateTime
+
+  # All values less than or equal the given value.
+  date_lte: DateTime
+
+  # All values greater than the given value.
+  date_gt: DateTime
+
+  # All values greater than or equal the given value.
+  date_gte: DateTime
+
+  #
+  status: OrderStatus
+
+  # All values that are not equal to given value.
+  status_not: OrderStatus
+
+  # All values that are contained in given list.
+  status_in: [OrderStatus!]
+
+  # All values that are not contained in given list.
+  status_not_in: [OrderStatus!]
 }
 
 type OrderSubscriptionPayload {
@@ -647,14 +568,27 @@ type OrderSubscriptionPayload {
 }
 
 input OrderSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [OrderSubscriptionWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [OrderSubscriptionWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [OrderSubscriptionWhereInput!]
+
+  # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
+
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
   updatedFields_contains: String
+
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
   updatedFields_contains_every: [String!]
+
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
   node: OrderWhereInput
-  AND: [OrderSubscriptionWhereInput!]
-  OR: [OrderSubscriptionWhereInput!]
-  NOT: [OrderSubscriptionWhereInput!]
 }
 
 input OrderUpdateInput {
@@ -677,33 +611,43 @@ input OrderUpdateManyMutationInput {
   status: OrderStatus
 }
 
+input OrderUpdateManyWithWhereNestedInput {
+  where: OrderScalarWhereInput!
+  data: OrderUpdateManyDataInput!
+}
+
 input OrderUpdateManyWithoutAssociatedUserInput {
   create: [OrderCreateWithoutAssociatedUserInput!]
-  delete: [OrderWhereUniqueInput!]
   connect: [OrderWhereUniqueInput!]
   set: [OrderWhereUniqueInput!]
   disconnect: [OrderWhereUniqueInput!]
+  delete: [OrderWhereUniqueInput!]
   update: [OrderUpdateWithWhereUniqueWithoutAssociatedUserInput!]
-  upsert: [OrderUpsertWithWhereUniqueWithoutAssociatedUserInput!]
-  deleteMany: [OrderScalarWhereInput!]
   updateMany: [OrderUpdateManyWithWhereNestedInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutAssociatedUserInput!]
 }
 
 input OrderUpdateManyWithoutProductsInput {
   create: [OrderCreateWithoutProductsInput!]
-  delete: [OrderWhereUniqueInput!]
   connect: [OrderWhereUniqueInput!]
   set: [OrderWhereUniqueInput!]
   disconnect: [OrderWhereUniqueInput!]
+  delete: [OrderWhereUniqueInput!]
   update: [OrderUpdateWithWhereUniqueWithoutProductsInput!]
-  upsert: [OrderUpsertWithWhereUniqueWithoutProductsInput!]
-  deleteMany: [OrderScalarWhereInput!]
   updateMany: [OrderUpdateManyWithWhereNestedInput!]
+  deleteMany: [OrderScalarWhereInput!]
+  upsert: [OrderUpsertWithWhereUniqueWithoutProductsInput!]
 }
 
-input OrderUpdateManyWithWhereNestedInput {
-  where: OrderScalarWhereInput!
-  data: OrderUpdateManyDataInput!
+input OrderUpdateWithWhereUniqueWithoutAssociatedUserInput {
+  where: OrderWhereUniqueInput!
+  data: OrderUpdateWithoutAssociatedUserDataInput!
+}
+
+input OrderUpdateWithWhereUniqueWithoutProductsInput {
+  where: OrderWhereUniqueInput!
+  data: OrderUpdateWithoutProductsDataInput!
 }
 
 input OrderUpdateWithoutAssociatedUserDataInput {
@@ -720,16 +664,6 @@ input OrderUpdateWithoutProductsDataInput {
   associatedUser: UserUpdateOneWithoutOrdersInput
 }
 
-input OrderUpdateWithWhereUniqueWithoutAssociatedUserInput {
-  where: OrderWhereUniqueInput!
-  data: OrderUpdateWithoutAssociatedUserDataInput!
-}
-
-input OrderUpdateWithWhereUniqueWithoutProductsInput {
-  where: OrderWhereUniqueInput!
-  data: OrderUpdateWithoutProductsDataInput!
-}
-
 input OrderUpsertWithWhereUniqueWithoutAssociatedUserInput {
   where: OrderWhereUniqueInput!
   update: OrderUpdateWithoutAssociatedUserDataInput!
@@ -742,77 +676,8 @@ input OrderUpsertWithWhereUniqueWithoutProductsInput {
   create: OrderCreateWithoutProductsInput!
 }
 
-input OrderWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
-  status: OrderStatus
-  status_not: OrderStatus
-  status_in: [OrderStatus!]
-  status_not_in: [OrderStatus!]
-  associatedUser: UserWhereInput
-  products_every: ProductWhereInput
-  products_some: ProductWhereInput
-  products_none: ProductWhereInput
-  AND: [OrderWhereInput!]
-  OR: [OrderWhereInput!]
-  NOT: [OrderWhereInput!]
-}
-
-input OrderWhereUniqueInput {
-  id: ID
-}
-
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-}
-
-type Product {
-  id: ID!
-  name: String!
-  price: Int!
-  status: ProductStatus
-  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
-  submittedBy: User
-  validatedBy: User
-  description: String!
-  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart!]
-}
-
-type ProductConnection {
-  pageInfo: PageInfo!
-  edges: [ProductEdge]!
-  aggregate: AggregateProduct!
+enum PrismaDatabase {
+  default
 }
 
 input ProductCreateInput {
@@ -820,10 +685,10 @@ input ProductCreateInput {
   name: String!
   price: Int!
   status: ProductStatus
+  description: String!
   orders: OrderCreateManyWithoutProductsInput
   submittedBy: UserCreateOneWithoutProductsInput
   validatedBy: UserCreateOneWithoutValidatedProductsInput
-  description: String!
   carts: CartCreateManyWithoutProductsInput
 }
 
@@ -852,10 +717,10 @@ input ProductCreateWithoutCartsInput {
   name: String!
   price: Int!
   status: ProductStatus
+  description: String!
   orders: OrderCreateManyWithoutProductsInput
   submittedBy: UserCreateOneWithoutProductsInput
   validatedBy: UserCreateOneWithoutValidatedProductsInput
-  description: String!
 }
 
 input ProductCreateWithoutOrdersInput {
@@ -863,9 +728,9 @@ input ProductCreateWithoutOrdersInput {
   name: String!
   price: Int!
   status: ProductStatus
+  description: String!
   submittedBy: UserCreateOneWithoutProductsInput
   validatedBy: UserCreateOneWithoutValidatedProductsInput
-  description: String!
   carts: CartCreateManyWithoutProductsInput
 }
 
@@ -874,9 +739,9 @@ input ProductCreateWithoutSubmittedByInput {
   name: String!
   price: Int!
   status: ProductStatus
+  description: String!
   orders: OrderCreateManyWithoutProductsInput
   validatedBy: UserCreateOneWithoutValidatedProductsInput
-  description: String!
   carts: CartCreateManyWithoutProductsInput
 }
 
@@ -885,28 +750,10 @@ input ProductCreateWithoutValidatedByInput {
   name: String!
   price: Int!
   status: ProductStatus
+  description: String!
   orders: OrderCreateManyWithoutProductsInput
   submittedBy: UserCreateOneWithoutProductsInput
-  description: String!
   carts: CartCreateManyWithoutProductsInput
-}
-
-type ProductEdge {
-  node: Product!
-  cursor: String!
-}
-
-enum ProductOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  price_ASC
-  price_DESC
-  status_ASC
-  status_DESC
-  description_ASC
-  description_DESC
 }
 
 type ProductPreviousValues {
@@ -918,69 +765,176 @@ type ProductPreviousValues {
 }
 
 input ProductScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  status: ProductStatus
-  status_not: ProductStatus
-  status_in: [ProductStatus!]
-  status_not_in: [ProductStatus!]
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
+  # Logical AND on all given filters.
   AND: [ProductScalarWhereInput!]
-  OR: [ProductScalarWhereInput!]
-  NOT: [ProductScalarWhereInput!]
-}
 
-enum ProductStatus {
-  VERIFIED
-  TO_REVIEW
-  DENIED
+  # Logical OR on all given filters.
+  OR: [ProductScalarWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProductScalarWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
+
+  #
+  status: ProductStatus
+
+  # All values that are not equal to given value.
+  status_not: ProductStatus
+
+  # All values that are contained in given list.
+  status_in: [ProductStatus!]
+
+  # All values that are not contained in given list.
+  status_not_in: [ProductStatus!]
+
+  #
+  description: String
+
+  # All values that are not equal to given value.
+  description_not: String
+
+  # All values that are contained in given list.
+  description_in: [String!]
+
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+
+  # All values less than the given value.
+  description_lt: String
+
+  # All values less than or equal the given value.
+  description_lte: String
+
+  # All values greater than the given value.
+  description_gt: String
+
+  # All values greater than or equal the given value.
+  description_gte: String
+
+  # All values containing the given string.
+  description_contains: String
+
+  # All values not containing the given string.
+  description_not_contains: String
+
+  # All values starting with the given string.
+  description_starts_with: String
+
+  # All values not starting with the given string.
+  description_not_starts_with: String
+
+  # All values ending with the given string.
+  description_ends_with: String
+
+  # All values not ending with the given string.
+  description_not_ends_with: String
 }
 
 type ProductSubscriptionPayload {
@@ -991,24 +945,37 @@ type ProductSubscriptionPayload {
 }
 
 input ProductSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProductSubscriptionWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [ProductSubscriptionWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProductSubscriptionWhereInput!]
+
+  # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
+
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
   updatedFields_contains: String
+
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
   updatedFields_contains_every: [String!]
+
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
   node: ProductWhereInput
-  AND: [ProductSubscriptionWhereInput!]
-  OR: [ProductSubscriptionWhereInput!]
-  NOT: [ProductSubscriptionWhereInput!]
 }
 
 input ProductUpdateInput {
   name: String
   price: Int
   status: ProductStatus
+  description: String
   orders: OrderUpdateManyWithoutProductsInput
   submittedBy: UserUpdateOneWithoutProductsInput
   validatedBy: UserUpdateOneWithoutValidatedProductsInput
-  description: String
   carts: CartUpdateManyWithoutProductsInput
 }
 
@@ -1026,97 +993,57 @@ input ProductUpdateManyMutationInput {
   description: String
 }
 
-input ProductUpdateManyWithoutCartsInput {
-  create: [ProductCreateWithoutCartsInput!]
-  delete: [ProductWhereUniqueInput!]
-  connect: [ProductWhereUniqueInput!]
-  set: [ProductWhereUniqueInput!]
-  disconnect: [ProductWhereUniqueInput!]
-  update: [ProductUpdateWithWhereUniqueWithoutCartsInput!]
-  upsert: [ProductUpsertWithWhereUniqueWithoutCartsInput!]
-  deleteMany: [ProductScalarWhereInput!]
-  updateMany: [ProductUpdateManyWithWhereNestedInput!]
-}
-
-input ProductUpdateManyWithoutOrdersInput {
-  create: [ProductCreateWithoutOrdersInput!]
-  delete: [ProductWhereUniqueInput!]
-  connect: [ProductWhereUniqueInput!]
-  set: [ProductWhereUniqueInput!]
-  disconnect: [ProductWhereUniqueInput!]
-  update: [ProductUpdateWithWhereUniqueWithoutOrdersInput!]
-  upsert: [ProductUpsertWithWhereUniqueWithoutOrdersInput!]
-  deleteMany: [ProductScalarWhereInput!]
-  updateMany: [ProductUpdateManyWithWhereNestedInput!]
-}
-
-input ProductUpdateManyWithoutSubmittedByInput {
-  create: [ProductCreateWithoutSubmittedByInput!]
-  delete: [ProductWhereUniqueInput!]
-  connect: [ProductWhereUniqueInput!]
-  set: [ProductWhereUniqueInput!]
-  disconnect: [ProductWhereUniqueInput!]
-  update: [ProductUpdateWithWhereUniqueWithoutSubmittedByInput!]
-  upsert: [ProductUpsertWithWhereUniqueWithoutSubmittedByInput!]
-  deleteMany: [ProductScalarWhereInput!]
-  updateMany: [ProductUpdateManyWithWhereNestedInput!]
-}
-
-input ProductUpdateManyWithoutValidatedByInput {
-  create: [ProductCreateWithoutValidatedByInput!]
-  delete: [ProductWhereUniqueInput!]
-  connect: [ProductWhereUniqueInput!]
-  set: [ProductWhereUniqueInput!]
-  disconnect: [ProductWhereUniqueInput!]
-  update: [ProductUpdateWithWhereUniqueWithoutValidatedByInput!]
-  upsert: [ProductUpsertWithWhereUniqueWithoutValidatedByInput!]
-  deleteMany: [ProductScalarWhereInput!]
-  updateMany: [ProductUpdateManyWithWhereNestedInput!]
-}
-
 input ProductUpdateManyWithWhereNestedInput {
   where: ProductScalarWhereInput!
   data: ProductUpdateManyDataInput!
 }
 
-input ProductUpdateWithoutCartsDataInput {
-  name: String
-  price: Int
-  status: ProductStatus
-  orders: OrderUpdateManyWithoutProductsInput
-  submittedBy: UserUpdateOneWithoutProductsInput
-  validatedBy: UserUpdateOneWithoutValidatedProductsInput
-  description: String
+input ProductUpdateManyWithoutCartsInput {
+  create: [ProductCreateWithoutCartsInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  delete: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutCartsInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutCartsInput!]
 }
 
-input ProductUpdateWithoutOrdersDataInput {
-  name: String
-  price: Int
-  status: ProductStatus
-  submittedBy: UserUpdateOneWithoutProductsInput
-  validatedBy: UserUpdateOneWithoutValidatedProductsInput
-  description: String
-  carts: CartUpdateManyWithoutProductsInput
+input ProductUpdateManyWithoutOrdersInput {
+  create: [ProductCreateWithoutOrdersInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  delete: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutOrdersInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutOrdersInput!]
 }
 
-input ProductUpdateWithoutSubmittedByDataInput {
-  name: String
-  price: Int
-  status: ProductStatus
-  orders: OrderUpdateManyWithoutProductsInput
-  validatedBy: UserUpdateOneWithoutValidatedProductsInput
-  description: String
-  carts: CartUpdateManyWithoutProductsInput
+input ProductUpdateManyWithoutSubmittedByInput {
+  create: [ProductCreateWithoutSubmittedByInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  delete: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutSubmittedByInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutSubmittedByInput!]
 }
 
-input ProductUpdateWithoutValidatedByDataInput {
-  name: String
-  price: Int
-  status: ProductStatus
-  orders: OrderUpdateManyWithoutProductsInput
-  submittedBy: UserUpdateOneWithoutProductsInput
-  description: String
-  carts: CartUpdateManyWithoutProductsInput
+input ProductUpdateManyWithoutValidatedByInput {
+  create: [ProductCreateWithoutValidatedByInput!]
+  connect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  disconnect: [ProductWhereUniqueInput!]
+  delete: [ProductWhereUniqueInput!]
+  update: [ProductUpdateWithWhereUniqueWithoutValidatedByInput!]
+  updateMany: [ProductUpdateManyWithWhereNestedInput!]
+  deleteMany: [ProductScalarWhereInput!]
+  upsert: [ProductUpsertWithWhereUniqueWithoutValidatedByInput!]
 }
 
 input ProductUpdateWithWhereUniqueWithoutCartsInput {
@@ -1137,6 +1064,46 @@ input ProductUpdateWithWhereUniqueWithoutSubmittedByInput {
 input ProductUpdateWithWhereUniqueWithoutValidatedByInput {
   where: ProductWhereUniqueInput!
   data: ProductUpdateWithoutValidatedByDataInput!
+}
+
+input ProductUpdateWithoutCartsDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+  orders: OrderUpdateManyWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+}
+
+input ProductUpdateWithoutOrdersDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+  submittedBy: UserUpdateOneWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateWithoutSubmittedByDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+  orders: OrderUpdateManyWithoutProductsInput
+  validatedBy: UserUpdateOneWithoutValidatedProductsInput
+  carts: CartUpdateManyWithoutProductsInput
+}
+
+input ProductUpdateWithoutValidatedByDataInput {
+  name: String
+  price: Int
+  status: ProductStatus
+  description: String
+  orders: OrderUpdateManyWithoutProductsInput
+  submittedBy: UserUpdateOneWithoutProductsInput
+  carts: CartUpdateManyWithoutProductsInput
 }
 
 input ProductUpsertWithWhereUniqueWithoutCartsInput {
@@ -1163,128 +1130,12 @@ input ProductUpsertWithWhereUniqueWithoutValidatedByInput {
   create: ProductCreateWithoutValidatedByInput!
 }
 
-input ProductWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  status: ProductStatus
-  status_not: ProductStatus
-  status_in: [ProductStatus!]
-  status_not_in: [ProductStatus!]
-  orders_every: OrderWhereInput
-  orders_some: OrderWhereInput
-  orders_none: OrderWhereInput
-  submittedBy: UserWhereInput
-  validatedBy: UserWhereInput
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  carts_every: CartWhereInput
-  carts_some: CartWhereInput
-  carts_none: CartWhereInput
-  AND: [ProductWhereInput!]
-  OR: [ProductWhereInput!]
-  NOT: [ProductWhereInput!]
-}
-
-input ProductWhereUniqueInput {
-  id: ID
-}
-
-type Query {
-  address(where: AddressWhereUniqueInput!): Address
-  addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
-  addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
-  cart(where: CartWhereUniqueInput!): Cart
-  carts(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Cart]!
-  cartsConnection(where: CartWhereInput, orderBy: CartOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CartConnection!
-  order(where: OrderWhereUniqueInput!): Order
-  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order]!
-  ordersConnection(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrderConnection!
-  product(where: ProductWhereUniqueInput!): Product
-  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
-  productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  node(id: ID!): Node
-}
-
-enum Role {
-  ROLE_USER
-  ROLE_SELLER
-  ROLE_ADMIN
-}
-
 type Subscription {
-  address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
-  cart(where: CartSubscriptionWhereInput): CartSubscriptionPayload
-  order(where: OrderSubscriptionWhereInput): OrderSubscriptionPayload
-  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type User {
-  id: ID!
-  username: String!
-  roles: Role!
-  password: String!
-  email: String!
-  address: Address
-  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
-  products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  validatedProducts(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product!]
-  cart: Cart
-}
-
-type UserConnection {
-  pageInfo: PageInfo!
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+  product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  order(where: OrderSubscriptionWhereInput): OrderSubscriptionPayload
+  cart(where: CartSubscriptionWhereInput): CartSubscriptionPayload
+  address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
 }
 
 input UserCreateInput {
@@ -1385,24 +1236,6 @@ input UserCreateWithoutValidatedProductsInput {
   cart: CartCreateOneWithoutRelatedUserInput
 }
 
-type UserEdge {
-  node: User!
-  cursor: String!
-}
-
-enum UserOrderByInput {
-  id_ASC
-  id_DESC
-  username_ASC
-  username_DESC
-  roles_ASC
-  roles_DESC
-  password_ASC
-  password_DESC
-  email_ASC
-  email_DESC
-}
-
 type UserPreviousValues {
   id: ID!
   username: String!
@@ -1419,14 +1252,27 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserSubscriptionWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [UserSubscriptionWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserSubscriptionWhereInput!]
+
+  # The subscription event gets dispatched when it's listed in mutation_in
   mutation_in: [MutationType!]
+
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
   updatedFields_contains: String
+
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
   updatedFields_contains_every: [String!]
+
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
   updatedFields_contains_some: [String!]
   node: UserWhereInput
-  AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateInput {
@@ -1450,47 +1296,47 @@ input UserUpdateManyMutationInput {
 
 input UserUpdateOneWithoutAddressInput {
   create: UserCreateWithoutAddressInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUpdateWithoutAddressDataInput
   upsert: UserUpsertWithoutAddressInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutCartInput {
   create: UserCreateWithoutCartInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUpdateWithoutCartDataInput
   upsert: UserUpsertWithoutCartInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutOrdersInput {
   create: UserCreateWithoutOrdersInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUpdateWithoutOrdersDataInput
   upsert: UserUpsertWithoutOrdersInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutProductsInput {
   create: UserCreateWithoutProductsInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUpdateWithoutProductsDataInput
   upsert: UserUpsertWithoutProductsInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutValidatedProductsInput {
   create: UserCreateWithoutValidatedProductsInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
   update: UserUpdateWithoutValidatedProductsDataInput
   upsert: UserUpsertWithoutValidatedProductsInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutAddressDataInput {
@@ -1573,66 +1419,1324 @@ input UserUpsertWithoutValidatedProductsInput {
   create: UserCreateWithoutValidatedProductsInput!
 }
 
-input UserWhereInput {
+type Address implements Node {
+  id: ID!
+  city: String!
+  country: String!
+  postalCode: String!
+  state: String!
+  streetAddress: String!
+  additionalStreetAddress: String!
+  associatedUser: User
+}
+
+# A connection to a list of items.
+type AddressConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AddressEdge]!
+  aggregate: AggregateAddress!
+}
+
+# An edge in a connection.
+type AddressEdge {
+  # The item at the end of the edge.
+  node: Address!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum AddressOrderByInput {
+  id_ASC
+  id_DESC
+  city_ASC
+  city_DESC
+  country_ASC
+  country_DESC
+  postalCode_ASC
+  postalCode_DESC
+  state_ASC
+  state_DESC
+  streetAddress_ASC
+  streetAddress_DESC
+  additionalStreetAddress_ASC
+  additionalStreetAddress_DESC
+}
+
+input AddressWhereInput {
+  # Logical AND on all given filters.
+  AND: [AddressWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [AddressWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [AddressWhereInput!]
+
+  #
   id: ID
+
+  # All values that are not equal to given value.
   id_not: ID
+
+  # All values that are contained in given list.
   id_in: [ID!]
+
+  # All values that are not contained in given list.
   id_not_in: [ID!]
+
+  # All values less than the given value.
   id_lt: ID
+
+  # All values less than or equal the given value.
   id_lte: ID
+
+  # All values greater than the given value.
   id_gt: ID
+
+  # All values greater than or equal the given value.
   id_gte: ID
+
+  # All values containing the given string.
   id_contains: ID
+
+  # All values not containing the given string.
   id_not_contains: ID
+
+  # All values starting with the given string.
   id_starts_with: ID
+
+  # All values not starting with the given string.
   id_not_starts_with: ID
+
+  # All values ending with the given string.
   id_ends_with: ID
+
+  # All values not ending with the given string.
   id_not_ends_with: ID
+
+  #
+  city: String
+
+  # All values that are not equal to given value.
+  city_not: String
+
+  # All values that are contained in given list.
+  city_in: [String!]
+
+  # All values that are not contained in given list.
+  city_not_in: [String!]
+
+  # All values less than the given value.
+  city_lt: String
+
+  # All values less than or equal the given value.
+  city_lte: String
+
+  # All values greater than the given value.
+  city_gt: String
+
+  # All values greater than or equal the given value.
+  city_gte: String
+
+  # All values containing the given string.
+  city_contains: String
+
+  # All values not containing the given string.
+  city_not_contains: String
+
+  # All values starting with the given string.
+  city_starts_with: String
+
+  # All values not starting with the given string.
+  city_not_starts_with: String
+
+  # All values ending with the given string.
+  city_ends_with: String
+
+  # All values not ending with the given string.
+  city_not_ends_with: String
+
+  #
+  country: String
+
+  # All values that are not equal to given value.
+  country_not: String
+
+  # All values that are contained in given list.
+  country_in: [String!]
+
+  # All values that are not contained in given list.
+  country_not_in: [String!]
+
+  # All values less than the given value.
+  country_lt: String
+
+  # All values less than or equal the given value.
+  country_lte: String
+
+  # All values greater than the given value.
+  country_gt: String
+
+  # All values greater than or equal the given value.
+  country_gte: String
+
+  # All values containing the given string.
+  country_contains: String
+
+  # All values not containing the given string.
+  country_not_contains: String
+
+  # All values starting with the given string.
+  country_starts_with: String
+
+  # All values not starting with the given string.
+  country_not_starts_with: String
+
+  # All values ending with the given string.
+  country_ends_with: String
+
+  # All values not ending with the given string.
+  country_not_ends_with: String
+
+  #
+  postalCode: String
+
+  # All values that are not equal to given value.
+  postalCode_not: String
+
+  # All values that are contained in given list.
+  postalCode_in: [String!]
+
+  # All values that are not contained in given list.
+  postalCode_not_in: [String!]
+
+  # All values less than the given value.
+  postalCode_lt: String
+
+  # All values less than or equal the given value.
+  postalCode_lte: String
+
+  # All values greater than the given value.
+  postalCode_gt: String
+
+  # All values greater than or equal the given value.
+  postalCode_gte: String
+
+  # All values containing the given string.
+  postalCode_contains: String
+
+  # All values not containing the given string.
+  postalCode_not_contains: String
+
+  # All values starting with the given string.
+  postalCode_starts_with: String
+
+  # All values not starting with the given string.
+  postalCode_not_starts_with: String
+
+  # All values ending with the given string.
+  postalCode_ends_with: String
+
+  # All values not ending with the given string.
+  postalCode_not_ends_with: String
+
+  #
+  state: String
+
+  # All values that are not equal to given value.
+  state_not: String
+
+  # All values that are contained in given list.
+  state_in: [String!]
+
+  # All values that are not contained in given list.
+  state_not_in: [String!]
+
+  # All values less than the given value.
+  state_lt: String
+
+  # All values less than or equal the given value.
+  state_lte: String
+
+  # All values greater than the given value.
+  state_gt: String
+
+  # All values greater than or equal the given value.
+  state_gte: String
+
+  # All values containing the given string.
+  state_contains: String
+
+  # All values not containing the given string.
+  state_not_contains: String
+
+  # All values starting with the given string.
+  state_starts_with: String
+
+  # All values not starting with the given string.
+  state_not_starts_with: String
+
+  # All values ending with the given string.
+  state_ends_with: String
+
+  # All values not ending with the given string.
+  state_not_ends_with: String
+
+  #
+  streetAddress: String
+
+  # All values that are not equal to given value.
+  streetAddress_not: String
+
+  # All values that are contained in given list.
+  streetAddress_in: [String!]
+
+  # All values that are not contained in given list.
+  streetAddress_not_in: [String!]
+
+  # All values less than the given value.
+  streetAddress_lt: String
+
+  # All values less than or equal the given value.
+  streetAddress_lte: String
+
+  # All values greater than the given value.
+  streetAddress_gt: String
+
+  # All values greater than or equal the given value.
+  streetAddress_gte: String
+
+  # All values containing the given string.
+  streetAddress_contains: String
+
+  # All values not containing the given string.
+  streetAddress_not_contains: String
+
+  # All values starting with the given string.
+  streetAddress_starts_with: String
+
+  # All values not starting with the given string.
+  streetAddress_not_starts_with: String
+
+  # All values ending with the given string.
+  streetAddress_ends_with: String
+
+  # All values not ending with the given string.
+  streetAddress_not_ends_with: String
+
+  #
+  additionalStreetAddress: String
+
+  # All values that are not equal to given value.
+  additionalStreetAddress_not: String
+
+  # All values that are contained in given list.
+  additionalStreetAddress_in: [String!]
+
+  # All values that are not contained in given list.
+  additionalStreetAddress_not_in: [String!]
+
+  # All values less than the given value.
+  additionalStreetAddress_lt: String
+
+  # All values less than or equal the given value.
+  additionalStreetAddress_lte: String
+
+  # All values greater than the given value.
+  additionalStreetAddress_gt: String
+
+  # All values greater than or equal the given value.
+  additionalStreetAddress_gte: String
+
+  # All values containing the given string.
+  additionalStreetAddress_contains: String
+
+  # All values not containing the given string.
+  additionalStreetAddress_not_contains: String
+
+  # All values starting with the given string.
+  additionalStreetAddress_starts_with: String
+
+  # All values not starting with the given string.
+  additionalStreetAddress_not_starts_with: String
+
+  # All values ending with the given string.
+  additionalStreetAddress_ends_with: String
+
+  # All values not ending with the given string.
+  additionalStreetAddress_not_ends_with: String
+  associatedUser: UserWhereInput
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
+
+type AggregateAddress {
+  count: Int!
+}
+
+type AggregateCart {
+  count: Int!
+}
+
+type AggregateOrder {
+  count: Int!
+}
+
+type AggregateProduct {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type Cart implements Node {
+  id: ID!
+  price: Int!
+  products(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product!]
+  relatedUser: User
+}
+
+# A connection to a list of items.
+type CartConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CartEdge]!
+  aggregate: AggregateCart!
+}
+
+# An edge in a connection.
+type CartEdge {
+  # The item at the end of the edge.
+  node: Cart!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum CartOrderByInput {
+  id_ASC
+  id_DESC
+  price_ASC
+  price_DESC
+}
+
+input CartWhereInput {
+  # Logical AND on all given filters.
+  AND: [CartWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [CartWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [CartWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+  relatedUser: UserWhereInput
+}
+
+input CartWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Order implements Node {
+  id: ID!
+  price: Int!
+  date: DateTime!
+  status: OrderStatus!
+  associatedUser: User
+  products(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product!]
+}
+
+# A connection to a list of items.
+type OrderConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [OrderEdge]!
+  aggregate: AggregateOrder!
+}
+
+# An edge in a connection.
+type OrderEdge {
+  # The item at the end of the edge.
+  node: Order!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum OrderOrderByInput {
+  id_ASC
+  id_DESC
+  price_ASC
+  price_DESC
+  date_ASC
+  date_DESC
+  status_ASC
+  status_DESC
+}
+
+enum OrderStatus {
+  DELIVERED
+  ORDERED
+  CANCELLED
+}
+
+input OrderWhereInput {
+  # Logical AND on all given filters.
+  AND: [OrderWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [OrderWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [OrderWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
+
+  #
+  date: DateTime
+
+  # All values that are not equal to given value.
+  date_not: DateTime
+
+  # All values that are contained in given list.
+  date_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  date_not_in: [DateTime!]
+
+  # All values less than the given value.
+  date_lt: DateTime
+
+  # All values less than or equal the given value.
+  date_lte: DateTime
+
+  # All values greater than the given value.
+  date_gt: DateTime
+
+  # All values greater than or equal the given value.
+  date_gte: DateTime
+
+  #
+  status: OrderStatus
+
+  # All values that are not equal to given value.
+  status_not: OrderStatus
+
+  # All values that are contained in given list.
+  status_in: [OrderStatus!]
+
+  # All values that are not contained in given list.
+  status_not_in: [OrderStatus!]
+  associatedUser: UserWhereInput
+  products_every: ProductWhereInput
+  products_some: ProductWhereInput
+  products_none: ProductWhereInput
+}
+
+input OrderWhereUniqueInput {
+  id: ID
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Product implements Node {
+  id: ID!
+  name: String!
+  price: Int!
+  status: ProductStatus
+  orders(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Order!]
+  submittedBy: User
+  validatedBy: User
+  description: String!
+  carts(
+    where: CartWhereInput
+    orderBy: CartOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Cart!]
+}
+
+# A connection to a list of items.
+type ProductConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ProductEdge]!
+  aggregate: AggregateProduct!
+}
+
+# An edge in a connection.
+type ProductEdge {
+  # The item at the end of the edge.
+  node: Product!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum ProductOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  status_ASC
+  status_DESC
+  description_ASC
+  description_DESC
+}
+
+enum ProductStatus {
+  VERIFIED
+  TO_REVIEW
+  DENIED
+}
+
+input ProductWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProductWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [ProductWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProductWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+
+  #
+  price: Int
+
+  # All values that are not equal to given value.
+  price_not: Int
+
+  # All values that are contained in given list.
+  price_in: [Int!]
+
+  # All values that are not contained in given list.
+  price_not_in: [Int!]
+
+  # All values less than the given value.
+  price_lt: Int
+
+  # All values less than or equal the given value.
+  price_lte: Int
+
+  # All values greater than the given value.
+  price_gt: Int
+
+  # All values greater than or equal the given value.
+  price_gte: Int
+
+  #
+  status: ProductStatus
+
+  # All values that are not equal to given value.
+  status_not: ProductStatus
+
+  # All values that are contained in given list.
+  status_in: [ProductStatus!]
+
+  # All values that are not contained in given list.
+  status_not_in: [ProductStatus!]
+
+  #
+  description: String
+
+  # All values that are not equal to given value.
+  description_not: String
+
+  # All values that are contained in given list.
+  description_in: [String!]
+
+  # All values that are not contained in given list.
+  description_not_in: [String!]
+
+  # All values less than the given value.
+  description_lt: String
+
+  # All values less than or equal the given value.
+  description_lte: String
+
+  # All values greater than the given value.
+  description_gt: String
+
+  # All values greater than or equal the given value.
+  description_gte: String
+
+  # All values containing the given string.
+  description_contains: String
+
+  # All values not containing the given string.
+  description_not_contains: String
+
+  # All values starting with the given string.
+  description_starts_with: String
+
+  # All values not starting with the given string.
+  description_not_starts_with: String
+
+  # All values ending with the given string.
+  description_ends_with: String
+
+  # All values not ending with the given string.
+  description_not_ends_with: String
+  orders_every: OrderWhereInput
+  orders_some: OrderWhereInput
+  orders_none: OrderWhereInput
+  submittedBy: UserWhereInput
+  validatedBy: UserWhereInput
+  carts_every: CartWhereInput
+  carts_some: CartWhereInput
+  carts_none: CartWhereInput
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  products(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product]!
+  orders(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Order]!
+  carts(
+    where: CartWhereInput
+    orderBy: CartOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Cart]!
+  addresses(
+    where: AddressWhereInput
+    orderBy: AddressOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Address]!
+  user(where: UserWhereUniqueInput!): User
+  product(where: ProductWhereUniqueInput!): Product
+  order(where: OrderWhereUniqueInput!): Order
+  cart(where: CartWhereUniqueInput!): Cart
+  address(where: AddressWhereUniqueInput!): Address
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
+  productsConnection(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ProductConnection!
+  ordersConnection(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): OrderConnection!
+  cartsConnection(
+    where: CartWhereInput
+    orderBy: CartOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): CartConnection!
+  addressesConnection(
+    where: AddressWhereInput
+    orderBy: AddressOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): AddressConnection!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+enum Role {
+  ROLE_USER
+  ROLE_SELLER
+  ROLE_ADMIN
+}
+
+type User implements Node {
+  id: ID!
+  username: String!
+  roles: Role!
+  password: String!
+  email: String!
+  address: Address
+  orders(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Order!]
+  products(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product!]
+  validatedProducts(
+    where: ProductWhereInput
+    orderBy: ProductOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Product!]
+  cart: Cart
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  roles_ASC
+  roles_DESC
+  password_ASC
+  password_DESC
+  email_ASC
+  email_DESC
+}
+
+input UserWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserWhereInput!]
+
+  # Logical OR on all given filters.
+  OR: [UserWhereInput!]
+
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserWhereInput!]
+
+  #
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+
+  #
   username: String
+
+  # All values that are not equal to given value.
   username_not: String
+
+  # All values that are contained in given list.
   username_in: [String!]
+
+  # All values that are not contained in given list.
   username_not_in: [String!]
+
+  # All values less than the given value.
   username_lt: String
+
+  # All values less than or equal the given value.
   username_lte: String
+
+  # All values greater than the given value.
   username_gt: String
+
+  # All values greater than or equal the given value.
   username_gte: String
+
+  # All values containing the given string.
   username_contains: String
+
+  # All values not containing the given string.
   username_not_contains: String
+
+  # All values starting with the given string.
   username_starts_with: String
+
+  # All values not starting with the given string.
   username_not_starts_with: String
+
+  # All values ending with the given string.
   username_ends_with: String
+
+  # All values not ending with the given string.
   username_not_ends_with: String
+
+  #
   roles: Role
+
+  # All values that are not equal to given value.
   roles_not: Role
+
+  # All values that are contained in given list.
   roles_in: [Role!]
+
+  # All values that are not contained in given list.
   roles_not_in: [Role!]
+
+  #
   password: String
+
+  # All values that are not equal to given value.
   password_not: String
+
+  # All values that are contained in given list.
   password_in: [String!]
+
+  # All values that are not contained in given list.
   password_not_in: [String!]
+
+  # All values less than the given value.
   password_lt: String
+
+  # All values less than or equal the given value.
   password_lte: String
+
+  # All values greater than the given value.
   password_gt: String
+
+  # All values greater than or equal the given value.
   password_gte: String
+
+  # All values containing the given string.
   password_contains: String
+
+  # All values not containing the given string.
   password_not_contains: String
+
+  # All values starting with the given string.
   password_starts_with: String
+
+  # All values not starting with the given string.
   password_not_starts_with: String
+
+  # All values ending with the given string.
   password_ends_with: String
+
+  # All values not ending with the given string.
   password_not_ends_with: String
+
+  #
   email: String
+
+  # All values that are not equal to given value.
   email_not: String
+
+  # All values that are contained in given list.
   email_in: [String!]
+
+  # All values that are not contained in given list.
   email_not_in: [String!]
+
+  # All values less than the given value.
   email_lt: String
+
+  # All values less than or equal the given value.
   email_lte: String
+
+  # All values greater than the given value.
   email_gt: String
+
+  # All values greater than or equal the given value.
   email_gte: String
+
+  # All values containing the given string.
   email_contains: String
+
+  # All values not containing the given string.
   email_not_contains: String
+
+  # All values starting with the given string.
   email_starts_with: String
+
+  # All values not starting with the given string.
   email_not_starts_with: String
+
+  # All values ending with the given string.
   email_ends_with: String
+
+  # All values not ending with the given string.
   email_not_ends_with: String
   address: AddressWhereInput
   orders_every: OrderWhereInput
@@ -1645,11 +2749,11 @@ input UserWhereInput {
   validatedProducts_some: ProductWhereInput
   validatedProducts_none: ProductWhereInput
   cart: CartWhereInput
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
   id: ID
 }
+
+# The `Long` scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long

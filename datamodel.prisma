@@ -1,3 +1,22 @@
+type User {
+  id: ID! @id
+  username: String!
+  roles: Role! @default(value: ROLE_USER)
+  password: String!
+  email: String!
+  address: Address @relation(link: INLINE)
+  orders: [Order!]
+  products: [Product!] @relation(name: "Submitted")
+  validatedProducts: [Product!] @relation(name: "Validated")
+  cart: Cart @relation(link: INLINE)
+}
+
+enum Role {
+  ROLE_USER
+  ROLE_SELLER
+  ROLE_ADMIN
+}
+
 type Product {
  id: ID! @id
  name: String!
@@ -47,23 +66,4 @@ type Address {
  streetAddress: String! @default(value: "")
  additionalStreetAddress: String! @default(value: "")
  associatedUser: User
-}
-
-type User {
-  id: ID! @id
-  username: String!
-  roles: Role! @default(value: ROLE_USER)
-  password: String!
-  email: String!
-  address: Address @relation(link: INLINE)
-  orders: [Order!]
-  products: [Product!] @relation(name: "Submitted")
-  validatedProducts: [Product!] @relation(name: "Validated")
-  cart: Cart @relation(link: INLINE)
-}
-
-enum Role {
-  ROLE_USER
-  ROLE_SELLER
-  ROLE_ADMIN
 }
