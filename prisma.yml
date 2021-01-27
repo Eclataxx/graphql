@@ -13,3 +13,6 @@ hooks:
   - graphql get-schema --project prisma
   - graphql codegen
   - echo "Deployment finished"
+
+seed:
+  run: npx ts-node ./data/seed.ts
